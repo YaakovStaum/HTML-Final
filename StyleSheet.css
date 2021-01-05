@@ -8,9 +8,28 @@
     margin-bottom: 25px;
     width:100vw;
 }
+.pop-up {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .product {
-    text-align:center;
-    padding-top:10px;
+    text-align: center;
+    padding-top: 10px;
 }
 .fa-star{
     border:none;
@@ -24,8 +43,26 @@
     background-color:inherit;
     color:blue;
 }
-.review-pop-up {
-    border: solid;
-    background-color: white;
-    position:center;
+.review-pop-up{
+    border:1px solid black;
+    width:400px;
+    background-color:white;
+}
+.review-header {
+    height:31px;
+}
+.review-body-header {
+    width: 100px;
+    height: 80px;
+    float: left;
+    flex-direction: column;
+}
+.review-body-body {
+    width: 290px;
+    height: 80px;
+}
+.review-body-grid {
+    display: grid;
+    grid-template-columns: 100px 290px;
+    grid-template-rows: 12px 25px 12px 25px 12px 60px 12px;
 }
