@@ -2,16 +2,38 @@
 <html>
 <head>
     <link href="StyleSheet.css" rel="stylesheet" />
+    <link href="JavaScript.js" rel="javascript" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta charset="utf-8" />
-    <script src="https://kit.fontawesome.com/2b6389b7bb.js" crossorigin="anonymous"></script>
-    <script>
+    <script>        
+        function writeReview() {
+            document.querySelector("#pop-up").style.display = "block";
+            document.querySelector("#my-review").style.display = "block";
+        };
+
+        function close(){
+            document.querySelector("#pop-up").style.display = "none";
+            document.querySelector("#my-review").style.display = "none";
+            document.querySelector("#general-review").style.display = "none";
+        }
+
+        function submitReview() {
+            var Name = document.querySelector("[name=name]").value;
+            var EMailAddress = document.querySelector("[name=eMailAddress]").value;
+            var Review = document.querySelector("[name=review]").value;
+            document.querySelector("#write-review").style.display = "none";
+            document.querySelector("#reviewed").style.display = "block";
+            close();
+        };
+
         window.addEventListener("load", function () {
-            document.querySelector("#review").addEventListener("click", function (e) {
-                document.querySelector(".review-pop-up").style.display = "block";
-            });
+            document.getElementById("close").addEventListener("click", close);
+            document.getElementById("submitReview").addEventListener("click", submitReview);
+            document.getElementById("write-review").addEventListener("click", writeReview);
         });
+
     </script>
+    <script src="https://kit.fontawesome.com/2b6389b7bb.js" crossorigin="anonymous"></script>
     <title>Store</title>
 </head>
 <body>
@@ -19,9 +41,9 @@
         <h1 style="display: inline-block; margin-top: 20px;">GRADE 'A' STORE</h1>
         <img style="float: right;" src="CompuskillsIcon.png" />
     </div>
-    <div class="pop-up">
+    <div id="pop-up" class="pop-up invisible">
             <div class="flexbox">
-                <div class="review-pop-up" id="general-review" style="display:none">
+                <div class="review-pop-up invisible" id="general-review">
                     <div class="review-pop-up review-header">
                         <p style="display:inline-block">View Reviews</p>
                         <button id="close" style="float:right;">X</button>
@@ -36,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="review-pop-up" id="my-review">
+                <div class="review-pop-up invisible" id="my-review">
                     <div class="review-pop-up review-header">
                         <p style="display:inline-block">Write A Review</p>
                         <button id="close" style="float:right;">X</button>
@@ -47,15 +69,34 @@
                         <input type="text" name="name" value="" style="height:25px"/>
                         <div></div><div></div>
                         <label class="flex">Email Address</label>
-                        <input type="text" name="EmailAddress" value="" style="height:25px"/>
+                        <input type="text" name="eMailAddress" value="" style="height:25px"/>
                         <div></div><div></div>
                         <label class="flex">Review</label>
-                        <input type="text" name="Review" value="" style="height:60px"/>
+                        <input type="text" name="review" value="" style="height:60px"/>
                         <div></div><div></div>
                     </div>
                     <div class="flex"><button id="submitReview" style="margin-bottom:15px">Submit Review</button></div>
                 </div>
-            </div>
+                <div id="edit-review" class="review-pop-up invisible">
+                    <div class="review-pop-up review-header">
+                        <p style="display:inline-block">Edit Review</p>
+                        <button id="close" style="float:right;">X</button>
+                    </div>
+                    <div class="review-body-grid">
+                        <div></div><div></div>
+                        <label class="flex">Name</label>
+                        <input type="text" name="name" value="Name" style="height:25px" />
+                        <div></div><div></div>
+                        <label class="flex">Email Address</label>
+                        <input type="text" name="eMailAddress" value="EMailAddress" style="height:25px" />
+                        <div></div><div></div>
+                        <label class="flex">Review</label>
+                        <input type="text" name="review" value="Review" style="height:60px" />
+                        <div></div><div></div>
+                    </div>
+                    <div class="flex"><button id="submitReview" style="margin-bottom:15px">Submit Review</button></div>
+                </div>
+            </div>f
         </div>
     <div class="container">
                 <div class="row height">
@@ -69,7 +110,8 @@
                             <button class="far fa-star" id="5" value="1"></button>
                         </div>
                         <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
+                        <button id="write-review" class="persanal-reviews">Write Review</button>
+                        <p id="reviewed" class="invisible">You wrote a <button class="review-button">review</button> on DATE</p>
                     </div>
                     <div class="col-lg-3 border" id="product2">
                         <div class="product"><img src="Product2.png" /></div>
@@ -92,7 +134,7 @@
                             <button class="far fa-star" id="1-4"></button>
                             <button class="far fa-star" id="1-5"></button>
                         </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
+                        <p class="reviews"><button class="review-button" type="button">3 Reviews</button></p>
                         <button class="persanal-reviews">Write Review</button>
                     </div>
                     <div class="col-lg-3 border" id="product4">
