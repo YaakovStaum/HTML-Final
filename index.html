@@ -5,31 +5,74 @@
     <link href="JavaScript.js" rel="javascript" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta charset="utf-8" />
-    <script>        
+    <script>
+        function reviews() {
+            document.querySelector("#pop-up").classList.remove("invisible");
+            document.querySelector("#general-review").classList.remove("invisible");
+        };
+        function editReview() {
+            document.querySelector("#pop-up").classList.remove("invisible");
+            document.querySelector("#edit-review").classList.remove("invisible");
+        };
         function writeReview() {
-            document.querySelector("#pop-up").style.display = "block";
-            document.querySelector("#my-review").style.display = "block";
+            document.querySelector("#pop-up").classList.remove("invisible");
+            document.querySelector("#my-review").classList.remove("invisible");
         };
 
-        function close(){
-            document.querySelector("#pop-up").style.display = "none";
-            document.querySelector("#my-review").style.display = "none";
-            document.querySelector("#general-review").style.display = "none";
+        function close() {
+            document.querySelector("#pop-up").classList.add("invisible");
+            document.querySelector("#my-review").classList.add("invisible");
+            document.querySelector("#general-review").classList.add("invisible");
         }
 
         function submitReview() {
             var Name = document.querySelector("[name=name]").value;
             var EMailAddress = document.querySelector("[name=eMailAddress]").value;
             var Review = document.querySelector("[name=review]").value;
-            document.querySelector("#write-review").style.display = "none";
-            document.querySelector("#reviewed").style.display = "block";
+            document.querySelector("#write-review").classList.add("invisible");
+            document.querySelector("#reviewed").classList.remove("invisible");
             close();
         };
 
+        function oneStar() {            
+            document.querySelector("#star1").classList.add("fas");
+            document.querySelector("#star2").classList.remove("fas");
+            document.querySelector("#star3").classList.remove("fas");
+            document.querySelector("#star4").classList.remove("fas");
+            document.querySelector("#star5").classList.remove("fas");
+        };
+
+        function twoStar() {
+            oneStar();
+            document.querySelector("#star2").classList.add("fas");
+        };
+
+        function threeStar() {
+            twoStar();
+            document.querySelector("#star3").classList.add("fas");
+        };
+
+        function fourStar() {
+            threeStar();
+            document.querySelector("#star4").classList.add("fas");
+        };
+
+        function fiveStar() {
+            fourStar();
+            document.querySelector("#star5").classList.add("fas");
+        };
+
         window.addEventListener("load", function () {
-            document.getElementById("close").addEventListener("click", close);
-            document.getElementById("submitReview").addEventListener("click", submitReview);
-            document.getElementById("write-review").addEventListener("click", writeReview);
+            document.querySelector("#close").addEventListener("click", close);
+            document.querySelector("#submitReview").addEventListener("click", submitReview);
+            document.querySelector("#write-review").addEventListener("click", writeReview);
+            document.querySelector("#edit-review-button").addEventListener("click", editReview);
+            document.querySelector("#review").addEventListener("click", reviews);
+            document.querySelector("#star1").addEventListener("click", oneStar);
+            document.querySelector("#star2").addEventListener("click", twoStar);
+            document.querySelector("#star3").addEventListener("click", threeStar);
+            document.querySelector("#star4").addEventListener("click", fourStar);
+            document.querySelector("#star5").addEventListener("click", fiveStar);
         });
 
     </script>
@@ -42,165 +85,212 @@
         <img style="float: right;" src="CompuskillsIcon.png" />
     </div>
     <div id="pop-up" class="pop-up invisible">
-            <div class="flexbox">
-                <div class="review-pop-up invisible" id="general-review">
-                    <div class="review-pop-up review-header">
-                        <p style="display:inline-block">View Reviews</p>
-                        <button id="close" style="float:right;">X</button>
-                    </div>
-                    <div class="review-pop-up review-body">
-                        <div class="review-body-header flex">
-                            <div>name</div>
-                            <div>date</div>
-                        </div>
-                        <div class="review-body-body flex">
-                            <div class="review-body-comment">Blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah!</div>
-                        </div>
-                    </div>
+        <div class="flexbox">
+            <div class="review-pop-up invisible" id="general-review">
+                <div class="review-pop-up review-header">
+                    <p style="display:inline-block">View Reviews</p>
+                    <button id="close" style="float:right;">X</button>
                 </div>
-                <div class="review-pop-up invisible" id="my-review">
-                    <div class="review-pop-up review-header">
-                        <p style="display:inline-block">Write A Review</p>
-                        <button id="close" style="float:right;">X</button>
+                <div class="review-pop-up review-body">
+                    <div class="review-body-header flex">
+                        <div>name</div>
+                        <div>date</div>
                     </div>
-                    <div class="review-body-grid">
-                        <div></div><div></div>
-                        <label class="flex">Name</label>
-                        <input type="text" name="name" value="" style="height:25px"/>
-                        <div></div><div></div>
-                        <label class="flex">Email Address</label>
-                        <input type="text" name="eMailAddress" value="" style="height:25px"/>
-                        <div></div><div></div>
-                        <label class="flex">Review</label>
-                        <input type="text" name="review" value="" style="height:60px"/>
-                        <div></div><div></div>
-                    </div>
-                    <div class="flex"><button id="submitReview" style="margin-bottom:15px">Submit Review</button></div>
-                </div>
-                <div id="edit-review" class="review-pop-up invisible">
-                    <div class="review-pop-up review-header">
-                        <p style="display:inline-block">Edit Review</p>
-                        <button id="close" style="float:right;">X</button>
-                    </div>
-                    <div class="review-body-grid">
-                        <div></div><div></div>
-                        <label class="flex">Name</label>
-                        <input type="text" name="name" value="Name" style="height:25px" />
-                        <div></div><div></div>
-                        <label class="flex">Email Address</label>
-                        <input type="text" name="eMailAddress" value="EMailAddress" style="height:25px" />
-                        <div></div><div></div>
-                        <label class="flex">Review</label>
-                        <input type="text" name="review" value="Review" style="height:60px" />
-                        <div></div><div></div>
-                    </div>
-                    <div class="flex"><button id="submitReview" style="margin-bottom:15px">Submit Review</button></div>
-                </div>
-            </div>f
-        </div>
-    <div class="container">
-                <div class="row height">
-                    <div class="col-lg-3 border" id="product1">
-                        <div class="product"><img src="Product1.png" /></div>
-                        <div class="stars">
-                            <button class="far fa-star" id="1" value="1"></button>
-                            <button class="far fa-star" id="2" value="1"></button>
-                            <button class="far fa-star" id="3" value="1"></button>
-                            <button class="far fa-star" id="4" value="1"></button>
-                            <button class="far fa-star" id="5" value="1"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button id="write-review" class="persanal-reviews">Write Review</button>
-                        <p id="reviewed" class="invisible">You wrote a <button class="review-button">review</button> on DATE</p>
-                    </div>
-                    <div class="col-lg-3 border" id="product2">
-                        <div class="product"><img src="Product2.png" /></div>
-                        <div class="stars">
-                            <button class="fas fa-star" id="1-1"></button>
-                            <button class="fas fa-star" id="1-2"></button>
-                            <button class="fas fa-star" id="1-3"></button>
-                            <button class="far fa-star" id="1-4"></button>
-                            <button class="far fa-star" id="1-5"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
-                    </div>
-                    <div class="col-lg-3 border" id="product3">
-                        <div class="product"><img src="Product3.png" /></div>
-                        <div class="stars">
-                            <button class="fas fa-star" id="1-1"></button>
-                            <button class="fas fa-star" id="1-2"></button>
-                            <button class="fas fa-star" id="1-3"></button>
-                            <button class="far fa-star" id="1-4"></button>
-                            <button class="far fa-star" id="1-5"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
-                    </div>
-                    <div class="col-lg-3 border" id="product4">
-                        <div class="product"><img src="Product4.png" /></div>
-                        <div class="stars">
-                            <button class="fas fa-star" id="1-1"></button>
-                            <button class="fas fa-star" id="1-2"></button>
-                            <button class="fas fa-star" id="1-3"></button>
-                            <button class="far fa-star" id="1-4"></button>
-                            <button class="far fa-star" id="1-5"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
-                    </div>
-                </div>
-                <div class="row height">
-                    <div class="col-lg-3 border" id="product5">
-                        <div class="product"><img src="Product5.png" /></div>
-                        <div class="stars">
-                            <button class="fas fa-star" id="1-1"></button>
-                            <button class="fas fa-star" id="1-2"></button>
-                            <button class="fas fa-star" id="1-3"></button>
-                            <button class="far fa-star" id="1-4"></button>
-                            <button class="far fa-star" id="1-5"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
-                    </div>
-                    <div class="col-lg-3 border" id="product6">
-                        <div class="product"><img src="Product6.png" /></div>
-                        <div class="stars">
-                            <button class="fas fa-star" id="1-1"></button>
-                            <button class="fas fa-star" id="1-2"></button>
-                            <button class="fas fa-star" id="1-3"></button>
-                            <button class="far fa-star" id="1-4"></button>
-                            <button class="far fa-star" id="1-5"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
-                    </div>
-                    <div class="col-lg-3 border" id="product7">
-                        <div class="product"><img src="Product7.png" /></div>
-                        <div class="stars">
-                            <button class="fas fa-star" id="1-1"></button>
-                            <button class="fas fa-star" id="1-2"></button>
-                            <button class="fas fa-star" id="1-3"></button>
-                            <button class="far fa-star" id="1-4"></button>
-                            <button class="far fa-star" id="1-5"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
-                    </div>
-                    <div class="col-lg-3 border" id="product8">
-                        <div class="product"><img src="Product8.png" /></div>
-                        <div class="stars">
-                            <button class="fas fa-star" id="1-1"></button>
-                            <button class="fas fa-star" id="1-2"></button>
-                            <button class="fas fa-star" id="1-3"></button>
-                            <button class="far fa-star" id="1-4"></button>
-                            <button class="far fa-star" id="1-5"></button>
-                        </div>
-                        <p class="reviews"><button class="review-button" type="button" id="review">3 Reviews</button></p>
-                        <button class="persanal-reviews">Write Review</button>
+                    <div class="review-body-body flex">
+                        <div class="review-body-comment">Blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah!</div>
                     </div>
                 </div>
             </div>
+            <div class="review-pop-up invisible" id="my-review">
+                <div class="review-pop-up review-header">
+                    <p style="display:inline-block">Write A Review</p>
+                    <button id="close" style="float:right;">X</button>
+                </div>
+                <div class="review-body-grid">
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Name</label>
+                    <input type="text" name="name" value="" style="height:25px" />
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Email Address</label>
+                    <input type="text" name="eMailAddress" value="" style="height:25px" />
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Review</label>
+                    <input type="text" name="review" value="" style="height:60px" />
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="flex">
+                    <button id="submitReview" style="margin-bottom:15px">Submit Review</button>
+                </div>
+            </div>
+            <div id="edit-review" class="review-pop-up invisible">
+                <div class="review-pop-up review-header">
+                    <p style="display:inline-block">Edit Review</p>
+                    <button id="close" style="float:right;">X</button>
+                </div>
+                <div class="review-body-grid">
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Name</label>
+                    <input type="text" name="name-edit" style="height:25px" />
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Email Address</label>
+                    <input type="text" name="eMailAddress-edit" style="height:25px" />
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Review</label>
+                    <input type="text" name="review-edit" style="height:60px" />
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="flex">
+                    <button id="submitReview" style="margin-bottom:15px">Submit Review</button>
+                </div>
+            </div>
+        </div>f
+    </div>
+    <div id="products" class="container">
+        <div class="row height">
+            <div class="col-lg-3 border" id="product1">
+                <div class="product">
+                    <img src="Product1.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="star1" value=""></button>
+                    <button class="far fas fa-star" id="star2" value=""></button>
+                    <button class="far fa-star" id="star3" value=""></button>
+                    <button class="far fa-star" id="star4" value=""></button>
+                    <button class="far fa-star" id="star5" value=""></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                </p>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
+            </div>
+            <div class="col-lg-3 border" id="product2">
+                <div class="product">
+                    <img src="Product2.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="1-1"></button>
+                    <button class="far fas fa-star" id="1-2"></button>
+                    <button class="far fas fa-star" id="1-3"></button>
+                    <button class="far fa-star" id="1-4"></button>
+                    <button class="far fa-star" id="1-5"></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                </p>
+                <button class="persanal-reviews">Write Review</button>
+            </div>
+            <div class="col-lg-3 border" id="product3">
+                <div class="product">
+                    <img src="Product3.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="1-1"></button>
+                    <button class="far fas fa-star" id="1-2"></button>
+                    <button class="far fas fa-star" id="1-3"></button>
+                    <button class="far fa-star" id="1-4"></button>
+                    <button class="far fa-star" id="1-5"></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button">3 Reviews</button>
+                </p>
+                <button class="persanal-reviews">Write Review</button>
+            </div>
+            <div class="col-lg-3 border" id="product4">
+                <div class="product">
+                    <img src="Product4.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="1-1"></button>
+                    <button class="far fas fa-star" id="1-2"></button>
+                    <button class="far fas fa-star" id="1-3"></button>
+                    <button class="far fa-star" id="1-4"></button>
+                    <button class="far fa-star" id="1-5"></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                </p>
+                <button class="persanal-reviews">Write Review</button>
+            </div>
+        </div>
+        <div class="row height">
+            <div class="col-lg-3 border" id="product5">
+                <div class="product">
+                    <img src="Product5.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="1-1"></button>
+                    <button class="far fas fa-star" id="1-2"></button>
+                    <button class="far fas fa-star" id="1-3"></button>
+                    <button class="far fa-star" id="1-4"></button>
+                    <button class="far fa-star" id="1-5"></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                </p>
+                <button class="persanal-reviews">Write Review</button>
+            </div>
+            <div class="col-lg-3 border" id="product6">
+                <div class="product">
+                    <img src="Product6.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="1-1"></button>
+                    <button class="far fas fa-star" id="1-2"></button>
+                    <button class="far fas fa-star" id="1-3"></button>
+                    <button class="far fa-star" id="1-4"></button>
+                    <button class="far fa-star" id="1-5"></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                </p>
+                <button class="persanal-reviews">Write Review</button>
+            </div>
+            <div class="col-lg-3 border" id="product7">
+                <div class="product">
+                    <img src="Product7.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="1-1"></button>
+                    <button class="far fas fa-star" id="1-2"></button>
+                    <button class="far fas fa-star" id="1-3"></button>
+                    <button class="far fa-star" id="1-4"></button>
+                    <button class="far fa-star" id="1-5"></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                </p>
+                <button class="persanal-reviews">Write Review</button>
+            </div>
+            <div class="col-lg-3 border" id="product8">
+                <div class="product">
+                    <img src="Product8.png" />
+                </div>
+                <div class="stars">
+                    <button class="far fas fa-star" id="1-1"></button>
+                    <button class="far fas fa-star" id="1-2"></button>
+                    <button class="far fas fa-star" id="1-3"></button>
+                    <button class="far fa-star" id="1-4"></button>
+                    <button class="far fa-star" id="1-5"></button>
+                </div>
+                <p class="reviews">
+                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                </p>
+                <button class="persanal-reviews">Write Review</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
