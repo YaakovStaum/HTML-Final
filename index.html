@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta charset="utf-8" />
     <script>
-        function reviews() {
+        var submitName1 = null;
+        var submitEmail1 = null;
+        var submitReview1 = null;
+
+        function allReviews() {
             document.querySelector("#pop-up").classList.remove("invisible");
             document.querySelector("#general-review").classList.remove("invisible");
         };
@@ -18,13 +22,22 @@
             var stuff = "feel free"
             document.querySelector("#pop-up").classList.remove("invisible");
             document.querySelector("#my-review").classList.remove("invisible");
-           
+
         };
 
         function close() {
             document.querySelector("#pop-up").classList.add("invisible");
             document.querySelector("#my-review").classList.add("invisible");
             document.querySelector("#general-review").classList.add("invisible");
+        }
+
+        function closeReviews() {
+            for (var i = 0; i < 6; i++) {
+                var a = i + 1;
+                var show = "#reviewer" + a;
+                document.querySelector(show).classList.add("invisible");
+            }
+            close();
         }
 
         function submitReview() {
@@ -39,45 +52,87 @@
             document.querySelector("#review-edit").value = Review;
         };
 
-        function oneStar() {            
-            document.querySelector("#star1").classList.add("fas");
-            document.querySelector("#star2").classList.remove("fas");
-            document.querySelector("#star3").classList.remove("fas");
-            document.querySelector("#star4").classList.remove("fas");
-            document.querySelector("#star5").classList.remove("fas");
-        };
+        window.addEventListener("load", function stars() {
+            var oneStars = document.querySelectorAll("#star1");
+            for (var i = 0; i < oneStars.length; i++) {
+                oneStars[i].addEventListener("click", function oneStar(e) {
+                    e.target.classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star2").classList.remove("fas");
+                    e.target.closest(".stars").querySelector("#star3").classList.remove("fas");
+                    e.target.closest(".stars").querySelector("#star4").classList.remove("fas");
+                    e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
+                });
+            }
 
-        function twoStar() {
-            oneStar();
-            document.querySelector("#star2").classList.add("fas");
-        };
+            var twoStars = document.querySelectorAll("#star2");
+            for (var i = 0; i < twoStars.length; i++) {
+                twoStars[i].addEventListener("click", function twoStar(e) {
+                    e.target.closest(".stars").querySelector("#star1").classList.add("fas");
+                    e.target.classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star3").classList.remove("fas");
+                    e.target.closest(".stars").querySelector("#star4").classList.remove("fas");
+                    e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
+                });
+            }
 
-        function threeStar() {
-            twoStar();
-            document.querySelector("#star3").classList.add("fas");
-        };
+            var threeStars = document.querySelectorAll('#star3');
+            for (var i = 0; i < threeStars.length; i++) {
+                threeStars[i].addEventListener("click", function (e) {
+                    e.target.closest(".stars").querySelector("#star1").classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star2").classList.add("fas");
+                    e.target.classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star4").classList.remove("fas");
+                    e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
+                });
+            }
 
-        function fourStar() {
-            threeStar();
-            document.querySelector("#star4").classList.add("fas");
-        };
+            var fourStars = document.querySelectorAll("#star4");
+            for (var i = 0; i < fourStars.length; i++) {
+                fourStars[i].addEventListener("click", function fourStar(e) {
+                    e.target.closest(".stars").querySelector("#star1").classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star2").classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star3").classList.add("fas");
+                    e.target.classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
+                });
+            }
 
-        function fiveStar() {
-            fourStar();
-            document.querySelector("#star5").classList.add("fas");
-        };
+            var fiveStars = document.querySelectorAll("#star5");
+            for (var i = 0; i < fiveStars.length; i++) {
+                fiveStars[i].addEventListener("click", function fiveStar(e) {
+                    e.target.closest(".stars").querySelector("#star1").classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star2").classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star3").classList.add("fas");
+                    e.target.closest(".stars").querySelector("#star4").classList.add("fas");
+                    e.target.classList.add("fas");
+                });
+            }
+        });
+
+        window.addEventListener("load", function reviews() {
+            var reviews = document.querySelectorAll("#review");
+            for (var i = 0; i < reviews.length; i++) {
+                reviews[i].addEventListener("click", function (e) {
+                    allReviews();
+                    var howMany = parseInt(e.target.innerText);
+                    for (var i = 0; i < howMany; i++) {
+                        var a = i + 1;
+                        var show = "#reviewer" + a ;
+                        document.querySelector(show).classList.remove("invisible");
+                    }
+                });
+            }
+        });
+        
 
         window.addEventListener("load", function () {
             document.querySelector("#close").addEventListener("click", close);
+            document.querySelector("#close-reviews").addEventListener("click", closeReviews);
             document.querySelector("#submitReview").addEventListener("click", submitReview);
             document.querySelector("#write-review").addEventListener("click", writeReview);
             document.querySelector("#edit-review-button").addEventListener("click", editReview);
-            document.querySelector("#review").addEventListener("click", reviews);
-            document.querySelector("#star1").addEventListener("click", oneStar);
-            document.querySelector("#star2").addEventListener("click", twoStar);
-            document.querySelector("#star3").addEventListener("click", threeStar);
-            document.querySelector("#star4").addEventListener("click", fourStar);
-            document.querySelector("#star5").addEventListener("click", fiveStar);
+            
+
         });
 
     </script>
@@ -94,17 +149,63 @@
             <div class="review-pop-up invisible" id="general-review">
                 <div class="review-pop-up review-header">
                     <p style="display:inline-block">View Reviews</p>
-                    <button id="close" style="float:right;">X</button>
+                    <button class="close" id="close-reviews" style="float:right;">X</button>
                 </div>
-                <div class="review-pop-up review-body">
+                <div id="reviewer1" class="review-pop-up review-body invisible">
                     <div class="review-body-header flex">
-                        <div>name</div>
-                        <div>date</div>
+                        <div>Sheli Brown</div>
+                        <div>02/04/2020</div>
                     </div>
                     <div class="review-body-body flex">
                         <div class="review-body-comment">Blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah!</div>
                     </div>
                 </div>
+                <div id="reviewer2" class="review-pop-up review-body invisible">
+                    <div class="review-body-header flex">
+                        <div>Nafka Mina</div>
+                        <div>22/06/2020</div>
+                    </div>
+                    <div class="review-body-body flex">
+                        <div class="review-body-comment">Buzz buzz buzz buzz buzz buzz buzzbuzz. Buzz buzzbuzzbuzzbuzzbuzzbuzzbuzz!</div>
+                    </div>
+                </div>
+                <div id="reviewer3" class="review-pop-up review-body invisible">
+                    <div class="review-body-header flex">
+                        <div>Billy Neder</div>
+                        <div>16/09/2020</div>
+                    </div>
+                    <div class="review-body-body flex">
+                        <div class="review-body-comment">mah nishtana halayla hazeh, mikol halylos?</div>
+                    </div>
+                </div>
+                <div id="reviewer4" class="review-pop-up review-body invisible">
+                    <div class="review-body-header flex">
+                        <div>Yaakov Yisrael</div>
+                        <div>02/04/2020</div>
+                    </div>
+                    <div class="review-body-body flex">
+                        <div class="review-body-comment">Let's burn something. Pas and shosekim!</div>
+                    </div>
+                </div>
+                <div id="reviewer5" class="review-pop-up review-body invisible">
+                    <div class="review-body-header flex">
+                        <div>Compu Skillet</div>
+                        <div>02/11/2020</div>
+                    </div>
+                    <div class="review-body-body flex">
+                        <div class="review-body-comment">C# ASP.NET MVC Jquery SureYnot.</div>
+                    </div>
+                </div>
+                <div id="reviewer6" class="review-pop-up review-body invisible">
+                    <div class="review-body-header flex">
+                        <div>Charli Brown</div>
+                        <div>21/12/2020</div>
+                    </div>
+                    <div class="review-body-body flex">
+                        <div class="review-body-comment">Don't move the ball for once! Oh, you are so immature!</div>
+                    </div>
+                </div>
+
             </div>
             <div class="review-pop-up invisible" id="my-review">
                 <div class="review-pop-up review-header">
@@ -156,7 +257,7 @@
                     <button id="submitReview" style="margin-bottom:15px">Submit Review</button>
                 </div>
             </div>
-        </div>f
+        </div>
     </div>
     <div id="products" class="container">
         <div class="row height">
@@ -165,7 +266,7 @@
                     <img src="Product1.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="star1" value=""></button>
+                    <button class="far fa-star" id="star1" value=""></button>
                     <button class="far fas fa-star" id="star2" value=""></button>
                     <button class="far fa-star" id="star3" value=""></button>
                     <button class="far fa-star" id="star4" value=""></button>
@@ -185,14 +286,14 @@
                     <img src="Product2.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="1-1"></button>
-                    <button class="far fas fa-star" id="1-2"></button>
-                    <button class="far fas fa-star" id="1-3"></button>
-                    <button class="far fa-star" id="1-4"></button>
-                    <button class="far fa-star" id="1-5"></button>
+                    <button class="far fas fa-star" id="star1"></button>
+                    <button class="far fas fa-star" id="star2"></button>
+                    <button class="far fas fa-star" id="star3"></button>
+                    <button class="far fa-star" id="star4"></button>
+                    <button class="far fa-star" id="star5"></button>
                 </div>
                 <p class="reviews">
-                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                    <button class="review-button" type="button" id="review">6 Reviews</button>
                 </p>
                 <button class="persanal-reviews">Write Review</button>
             </div>
@@ -201,14 +302,14 @@
                     <img src="Product3.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="1-1"></button>
-                    <button class="far fas fa-star" id="1-2"></button>
-                    <button class="far fas fa-star" id="1-3"></button>
-                    <button class="far fa-star" id="1-4"></button>
-                    <button class="far fa-star" id="1-5"></button>
+                    <button class="far fas fa-star" id="star1"></button>
+                    <button class="far fas fa-star" id="star2"></button>
+                    <button class="far fas fa-star" id="star3"></button>
+                    <button class="far fa-star" id="star4"></button>
+                    <button class="far fa-star" id="star5"></button>
                 </div>
                 <p class="reviews">
-                    <button class="review-button" type="button">3 Reviews</button>
+                    <button id="review" class="review-button" type="button">2 Reviews</button>
                 </p>
                 <button class="persanal-reviews">Write Review</button>
             </div>
@@ -217,14 +318,14 @@
                     <img src="Product4.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="1-1"></button>
-                    <button class="far fas fa-star" id="1-2"></button>
-                    <button class="far fas fa-star" id="1-3"></button>
-                    <button class="far fa-star" id="1-4"></button>
-                    <button class="far fa-star" id="1-5"></button>
+                    <button class="far fas fa-star" id="star1"></button>
+                    <button class="far fas fa-star" id="star2"></button>
+                    <button class="far fas fa-star" id="star3"></button>
+                    <button class="far fa-star" id="star4"></button>
+                    <button class="far fa-star" id="star5"></button>
                 </div>
                 <p class="reviews">
-                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                    <button id="review" class="review-button" type="button">1 Review</button>
                 </p>
                 <button class="persanal-reviews">Write Review</button>
             </div>
@@ -235,46 +336,46 @@
                     <img src="Product5.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="1-1"></button>
-                    <button class="far fas fa-star" id="1-2"></button>
-                    <button class="far fas fa-star" id="1-3"></button>
-                    <button class="far fa-star" id="1-4"></button>
-                    <button class="far fa-star" id="1-5"></button>
+                    <button class="far fas fa-star" id="star1"></button>
+                    <button class="far fas fa-star" id="star2"></button>
+                    <button class="far fas fa-star" id="star3"></button>
+                    <button class="far fa-star" id="star4"></button>
+                    <button class="far fa-star" id="star5"></button>
                 </div>
                 <p class="reviews">
                     <button class="review-button" type="button" id="review">3 Reviews</button>
                 </p>
-                <button class="persanal-reviews">Write Review</button>
+                <button id="review" class="persanal-reviews">Write Review</button>
             </div>
             <div class="col-lg-3 border" id="product6">
                 <div class="product">
                     <img src="Product6.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="1-1"></button>
-                    <button class="far fas fa-star" id="1-2"></button>
-                    <button class="far fas fa-star" id="1-3"></button>
-                    <button class="far fa-star" id="1-4"></button>
-                    <button class="far fa-star" id="1-5"></button>
+                    <button class="far fas fa-star" id="star1"></button>
+                    <button class="far fas fa-star" id="star2"></button>
+                    <button class="far fas fa-star" id="star3"></button>
+                    <button class="far fa-star" id="star4"></button>
+                    <button class="far fa-star" id="star5"></button>
                 </div>
                 <p class="reviews">
                     <button class="review-button" type="button" id="review">3 Reviews</button>
                 </p>
-                <button class="persanal-reviews">Write Review</button>
+                <button id="review" class="persanal-reviews">Write Review</button>
             </div>
             <div class="col-lg-3 border" id="product7">
                 <div class="product">
                     <img src="Product7.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="1-1"></button>
-                    <button class="far fas fa-star" id="1-2"></button>
-                    <button class="far fas fa-star" id="1-3"></button>
-                    <button class="far fa-star" id="1-4"></button>
-                    <button class="far fa-star" id="1-5"></button>
+                    <button class="far fas fa-star" id="star1"></button>
+                    <button class="far fas fa-star" id="star2"></button>
+                    <button class="far fas fa-star" id="star3"></button>
+                    <button class="far fa-star" id="star4"></button>
+                    <button class="far fa-star" id="star5"></button>
                 </div>
                 <p class="reviews">
-                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                    <button id="review" class="review-button" type="button">2 Reviews</button>
                 </p>
                 <button class="persanal-reviews">Write Review</button>
             </div>
@@ -283,14 +384,14 @@
                     <img src="Product8.png" />
                 </div>
                 <div class="stars">
-                    <button class="far fas fa-star" id="1-1"></button>
-                    <button class="far fas fa-star" id="1-2"></button>
-                    <button class="far fas fa-star" id="1-3"></button>
-                    <button class="far fa-star" id="1-4"></button>
-                    <button class="far fa-star" id="1-5"></button>
+                    <button class="far fas fa-star" id="star1"></button>
+                    <button class="far fas fa-star" id="star2"></button>
+                    <button class="far fas fa-star" id="star3"></button>
+                    <button class="far fa-star" id="star4"></button>
+                    <button class="far fa-star" id="star5"></button>
                 </div>
                 <p class="reviews">
-                    <button class="review-button" type="button" id="review">3 Reviews</button>
+                    <button id="review" class="review-button" type="button">4 Reviews</button>
                 </p>
                 <button class="persanal-reviews">Write Review</button>
             </div>
