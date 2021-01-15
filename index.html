@@ -6,24 +6,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta charset="utf-8" />
     <script>
-        var submitName1 = null;
-        var submitEmail1 = null;
-        var submitReview1 = null;
+        var productNum = 0;
 
-        function allReviews() {
-            document.querySelector("#pop-up").classList.remove("invisible");
-            document.querySelector("#general-review").classList.remove("invisible");
-        };
-        function editReview() {
-            document.querySelector("#pop-up").classList.remove("invisible");
-            document.querySelector("#edit-review").classList.remove("invisible");
-        };
-        function writeReview() {
-            var stuff = "feel free"
-            document.querySelector("#pop-up").classList.remove("invisible");
-            document.querySelector("#my-review").classList.remove("invisible");
-
-        };
+        var name1 = null;
+        var email1 = null;
+        var review1 = null;
+        var name2 = null;
+        var email2 = null;
+        var review2 = null;
+        var name3 = null;
+        var email3 = null;
+        var review3 = null;
+        var name4 = null;
+        var email4 = null;
+        var review4 = null;
+        var name5 = null;
+        var email5 = null;
+        var review5 = null;
+        var name6 = null;
+        var email6 = null;
+        var review6 = null;
+        var name7 = null;
+        var email7 = null;
+        var review7 = null;
+        var name8 = null;
+        var email8 = null;
+        var review8 = null;
 
         function close() {
             document.querySelector("#pop-up").classList.add("invisible");
@@ -41,16 +49,52 @@
         }
 
         function submitReview() {
-            var Name = document.querySelector("[name=name]").value;
-            var EMailAddress = document.querySelector("[name=eMailAddress]").value;
-            var Review = document.querySelector("[name=review]").value;
-            document.querySelector("#write-review").classList.add("invisible");
-            document.querySelector("#reviewed").classList.remove("invisible");
+
+            var Product = "#product" + productNum;
+            document.querySelector(Product).querySelector("#write-review").classList.add("invisible");
+            document.querySelector(Product).querySelector("#reviewed").classList.remove("invisible");
+
+            window["name" + productNum] = document.querySelector("[name=name]").value;
+            document.querySelector("[name=name]").value = "";
+            window["email" + productNum] = document.querySelector("[name=eMailAddress]").value;
+            document.querySelector("[name=eMailAddress]").value = "";
+            window["review" + productNum] = document.querySelector("[name=review]").value;
+            document.querySelector("[name=review]").value = "";
+
             close();
-            document.querySelector("#name-edit").value = Name;
-            document.querySelector("#eMailAddress-edit").value = EMailAddress;
-            document.querySelector("#review-edit").value = Review;
         };
+
+        window.addEventListener("load", function myReview() {
+            var myReviews = document.querySelectorAll("#write-review");
+            for (var i = 0; i < myReviews.length; i++) {
+                myReviews[i].addEventListener("click", function (e) {
+                    var productNumString = e.target.closest("div").id;
+                    productNum = parseInt(productNumString.match(/[0-9]+/gi));
+
+                    document.querySelector("#pop-up").classList.remove("invisible");
+                    document.querySelector("#my-review").classList.remove("invisible");
+                    document.querySelector("#write").classList.remove("invisible");
+                    document.querySelector("#edit").classList.add("invisible");
+                });
+            }
+
+            var editReview = document.querySelectorAll("#edit-review-button");
+            for (var i = 0; i < editReview.length; i++) {
+                editReview[i].addEventListener("click", function (e) {
+                    var productNumString = e.target.closest("div").id;
+                    productNum = parseInt(productNumString.match(/[0-9]+/gi));
+
+                    document.querySelector("[name=name]").value = window['name' + productNum];
+                    document.querySelector("[name=eMailAddress]").value = window["email" + productNum]
+                    document.querySelector("[name=review]").value = window["review" + productNum]
+
+                    document.querySelector("#pop-up").classList.remove("invisible");
+                    document.querySelector("#my-review").classList.remove("invisible");
+                    document.querySelector("#write").classList.add("invisible");
+                    document.querySelector("#edit").classList.remove("invisible");
+                });
+            }
+        });
 
         window.addEventListener("load", function stars() {
             var oneStars = document.querySelectorAll("#star1");
@@ -113,26 +157,23 @@
             var reviews = document.querySelectorAll("#review");
             for (var i = 0; i < reviews.length; i++) {
                 reviews[i].addEventListener("click", function (e) {
-                    allReviews();
+                    document.querySelector("#pop-up").classList.remove("invisible");
+                    document.querySelector("#general-review").classList.remove("invisible");
                     var howMany = parseInt(e.target.innerText);
                     for (var i = 0; i < howMany; i++) {
                         var a = i + 1;
-                        var show = "#reviewer" + a ;
+                        var show = "#reviewer" + a;
                         document.querySelector(show).classList.remove("invisible");
                     }
                 });
             }
         });
-        
+
 
         window.addEventListener("load", function () {
             document.querySelector("#close").addEventListener("click", close);
             document.querySelector("#close-reviews").addEventListener("click", closeReviews);
             document.querySelector("#submitReview").addEventListener("click", submitReview);
-            document.querySelector("#write-review").addEventListener("click", writeReview);
-            document.querySelector("#edit-review-button").addEventListener("click", editReview);
-            
-
         });
 
     </script>
@@ -209,7 +250,7 @@
             </div>
             <div class="review-pop-up invisible" id="my-review">
                 <div class="review-pop-up review-header">
-                    <p style="display:inline-block">Write A Review</p>
+                    <div style="display:inline-block"><p id="write">Write A Review</p><p id="edit" class="invisible">Edit Review</p></div>
                     <button id="close" style="float:right;">X</button>
                 </div>
                 <div class="review-body-grid">
@@ -232,42 +273,17 @@
                     <button id="submitReview" style="margin-bottom:15px">Submit Review</button>
                 </div>
             </div>
-            <div id="edit-review" class="review-pop-up invisible">
-                <div class="review-pop-up review-header">
-                    <p style="display:inline-block">Edit Review</p>
-                    <button id="close" style="float:right;">X</button>
-                </div>
-                <div class="review-body-grid">
-                    <div></div>
-                    <div></div>
-                    <label class="flex">Name</label>
-                    <input type="text" id="name-edit" style="height:25px" />
-                    <div></div>
-                    <div></div>
-                    <label class="flex">Email Address</label>
-                    <input type="text" id="eMailAddress-edit" style="height:25px" />
-                    <div></div>
-                    <div></div>
-                    <label class="flex">Review</label>
-                    <input type="text" id="review-edit" style="height:60px" />
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="flex">
-                    <button id="submitReview" style="margin-bottom:15px">Submit Review</button>
-                </div>
-            </div>
         </div>
     </div>
     <div id="products" class="container">
         <div class="row height">
-            <div class="col-lg-3 border" id="product1">
+            <div class="col-lg-3 border product1" id="product1">
                 <div class="product">
                     <img src="Product1.png" />
                 </div>
                 <div class="stars">
                     <button class="far fa-star" id="star1" value=""></button>
-                    <button class="far fas fa-star" id="star2" value=""></button>
+                    <button class="far fa-star" id="star2" value=""></button>
                     <button class="far fa-star" id="star3" value=""></button>
                     <button class="far fa-star" id="star4" value=""></button>
                     <button class="far fa-star" id="star5" value=""></button>
@@ -295,7 +311,11 @@
                 <p class="reviews">
                     <button class="review-button" type="button" id="review">6 Reviews</button>
                 </p>
-                <button class="persanal-reviews">Write Review</button>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
             </div>
             <div class="col-lg-3 border" id="product3">
                 <div class="product">
@@ -311,7 +331,11 @@
                 <p class="reviews">
                     <button id="review" class="review-button" type="button">2 Reviews</button>
                 </p>
-                <button class="persanal-reviews">Write Review</button>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
             </div>
             <div class="col-lg-3 border" id="product4">
                 <div class="product">
@@ -327,7 +351,11 @@
                 <p class="reviews">
                     <button id="review" class="review-button" type="button">1 Review</button>
                 </p>
-                <button class="persanal-reviews">Write Review</button>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
             </div>
         </div>
         <div class="row height">
@@ -345,7 +373,11 @@
                 <p class="reviews">
                     <button class="review-button" type="button" id="review">3 Reviews</button>
                 </p>
-                <button id="review" class="persanal-reviews">Write Review</button>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
             </div>
             <div class="col-lg-3 border" id="product6">
                 <div class="product">
@@ -361,7 +393,11 @@
                 <p class="reviews">
                     <button class="review-button" type="button" id="review">3 Reviews</button>
                 </p>
-                <button id="review" class="persanal-reviews">Write Review</button>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
             </div>
             <div class="col-lg-3 border" id="product7">
                 <div class="product">
@@ -377,7 +413,11 @@
                 <p class="reviews">
                     <button id="review" class="review-button" type="button">2 Reviews</button>
                 </p>
-                <button class="persanal-reviews">Write Review</button>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
             </div>
             <div class="col-lg-3 border" id="product8">
                 <div class="product">
@@ -393,7 +433,11 @@
                 <p class="reviews">
                     <button id="review" class="review-button" type="button">4 Reviews</button>
                 </p>
-                <button class="persanal-reviews">Write Review</button>
+                <button id="write-review" class="persanal-reviews">Write Review</button>
+                <p id="reviewed" class="invisible">
+                    You wrote a
+                    <button id="edit-review-button" class="review-button">review</button> on DATE
+                </p>
             </div>
         </div>
     </div>
