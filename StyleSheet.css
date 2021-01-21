@@ -57,7 +57,7 @@
 
 .review-pop-up {
     border: 1px solid black;
-    width: 400px;
+    width: 480px;
     background-color: white;
 }
 
@@ -79,6 +79,6 @@
 
 .review-body-grid {
     display: grid;
-    grid-template-columns: 100px 290px;
-    grid-template-rows: 12px 25px 12px 25px 12px 60px 12px;
+    grid-template-columns: 100px 370px;
+    grid-template-rows: 12px 25px 12px 25px 12px 105px 12px;
 }
