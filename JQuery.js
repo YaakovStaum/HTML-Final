@@ -47,123 +47,99 @@ function closeReviews() {
 function submitReview() {
 
     var Product = "#product" + productNum;
-    $(Product).next("#write-review").addClass("invisible");
-    $(Product).next("#reviewed").removeClass("invisible");
+    $(Product).find("#write-review").addClass("invisible");
+    $(Product).find("#reviewed").removeClass("invisible");
 
     window["name" + productNum] = $("#nameInput").val();
-    window["email" + productNum] = document.querySelector("#eMailAddressInput").value;
-    window["review" + productNum] = document.querySelector("#reviewInput").value;
+    window["email" + productNum] = $("#eMailAddressInput").val();
+    window["review" + productNum] = $("#reviewInput").val();
 
     close();
 }
 
 $(document).ready(function myReview() {
-    var myReviews = document.querySelectorAll("#write-review");
-    for (var i = 0; i < myReviews.length; i++) {
-        myReviews[i].addEventListener("click", function (e) {
-            var productNumString = e.target.closest("div").id;
-            productNum = parseInt(productNumString.match(/[0-9]+/gi));
+    $(".persanal-reviews").on("click", function (e) {
+        var myReviews = $(this);
 
-            $("#pop-up").removeClass("invisible");
-            $("#my-review").removeClass("invisible");
-            $("#write").removeClass("invisible");
-            $("#edit").addClass("invisible");
-        });
-    }
+        var productNumString = myReviews.closest("div").attr("id");
+        productNum = parseInt(productNumString.match(/[0-9]+/gi));
 
-    var editReview = document.querySelectorAll("#edit-review-button");
-    for (var i = 0; i < editReview.length; i++) {
-        editReview[i].addEventListener("click", function (e) {
-            var productNumString = e.target.closest("div").id;
-            productNum = parseInt(productNumString.match(/[0-9]+/gi));
+        $("#pop-up").removeClass("invisible");
+        $("#my-review").removeClass("invisible");
+        $("#write").removeClass("invisible");
+        $("#edit").addClass("invisible");
+    });
 
-            document.querySelector("#nameInput").value = window['name' + productNum];
-            document.querySelector("#eMailAddressInput").value = window["email" + productNum]
-            document.querySelector("#reviewInput").value = window["review" + productNum]
+    $(".edit-review-button").on("click", function (e) {
+        var editReviews = $(this);
+        var productNumString = editReviews.closest("div").attr("id");
+        productNum = parseInt(productNumString.match(/[0-9]+/gi));
 
-            document.querySelector("#pop-up").classList.remove("invisible");
-            document.querySelector("#my-review").classList.remove("invisible");
-            document.querySelector("#write").classList.add("invisible");
-            document.querySelector("#edit").classList.remove("invisible");
-        });
-    }
+        $("#nameInput").val(window['name' + productNum]);
+        $("#eMailAddressInput").val(window["email" + productNum]);
+        $("#reviewInput").val(window["review" + productNum]);
+
+        $("#pop-up").removeClass("invisible");
+        $("#my-review").removeClass("invisible");
+        $("#write").addClass("invisible");
+        $("#edit").removeClass("invisible");
+    });
 });
 
 $(document).ready(function stars() {
-    var oneStars = document.querySelectorAll("#star1");
-    for (var i = 0; i < oneStars.length; i++) {
-        oneStars[i].addEventListener("click", function oneStar(e) {
-            e.target.classList.add("fas");
-            e.target.closest(".stars").querySelector("#star2").classList.remove("fas");
-            e.target.closest(".stars").querySelector("#star3").classList.remove("fas");
-            e.target.closest(".stars").querySelector("#star4").classList.remove("fas");
-            e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
-        });
-    }
+    $(".star1").on("click", function oneStars(e) {
+        var oneStar = $(this);
+        oneStar.addClass("fas");
+        oneStar.nextAll().removeClass("fas");
+    });
 
-    var twoStars = document.querySelectorAll("#star2");
-    for (var i = 0; i < twoStars.length; i++) {
-        twoStars[i].addEventListener("click", function twoStar(e) {
-            e.target.closest(".stars").querySelector("#star1").classList.add("fas");
-            e.target.classList.add("fas");
-            e.target.closest(".stars").querySelector("#star3").classList.remove("fas");
-            e.target.closest(".stars").querySelector("#star4").classList.remove("fas");
-            e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
-        });
-    }
+    $(".star2").on("click", function twoStars(e) {
+        var twoStar = $(this);
+        twoStar.addClass("fas");
+        twoStar.nextAll().removeClass("fas");
+        twoStar.prevAll().addClass("fas");
+    });
 
-    var threeStars = document.querySelectorAll('#star3');
-    for (var i = 0; i < threeStars.length; i++) {
-        threeStars[i].addEventListener("click", function (e) {
-            e.target.closest(".stars").querySelector("#star1").classList.add("fas");
-            e.target.closest(".stars").querySelector("#star2").classList.add("fas");
-            e.target.classList.add("fas");
-            e.target.closest(".stars").querySelector("#star4").classList.remove("fas");
-            e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
-        });
-    }
+    $(".star3").on("click", function threeStars(e) {
+        var threeStar = $(this);
+        threeStar.addClass("fas");
+        threeStar.nextAll().removeClass("fas");
+        threeStar.prevAll().addClass("fas");
+    });
 
-    var fourStars = document.querySelectorAll("#star4");
-    for (var i = 0; i < fourStars.length; i++) {
-        fourStars[i].addEventListener("click", function fourStar(e) {
-            e.target.closest(".stars").querySelector("#star1").classList.add("fas");
-            e.target.closest(".stars").querySelector("#star2").classList.add("fas");
-            e.target.closest(".stars").querySelector("#star3").classList.add("fas");
-            e.target.classList.add("fas");
-            e.target.closest(".stars").querySelector("#star5").classList.remove("fas");
-        });
-    }
+    $(".star4").on("click", function fourStars(e) {
+        var fourStar = $(this);
+        fourStar.addClass("fas");
+        fourStar.nextAll().removeClass("fas");
+        fourStar.prevAll().addClass("fas");
+    });
 
-    var fiveStars = document.querySelectorAll("#star5");
-    for (var i = 0; i < fiveStars.length; i++) {
-        fiveStars[i].addEventListener("click", function fiveStar(e) {
-            e.target.closest(".stars").querySelector("#star1").classList.add("fas");
-            e.target.closest(".stars").querySelector("#star2").classList.add("fas");
-            e.target.closest(".stars").querySelector("#star3").classList.add("fas");
-            e.target.closest(".stars").querySelector("#star4").classList.add("fas");
-            e.target.classList.add("fas");
-        });
-    }
+    $(".star5").on("click", function fiveStars(e) {
+        var fiveStar = $(this);
+        fiveStar.addClass("fas");
+        fiveStar.nextAll().removeClass("fas");
+        fiveStar.prevAll().addClass("fas");
+    });
 });
 
 $(document).ready(function reviews() {
-    var reviews = document.querySelectorAll("#review");
-    for (var i = 0; i < reviews.length; i++) {
-        reviews[i].addEventListener("click", function (e) {
-            document.querySelector("#pop-up").classList.remove("invisible");
-            document.querySelector("#general-review").classList.remove("invisible");
-            var howMany = parseInt(e.target.innerText);
-            for (var i = 0; i < howMany; i++) {
-                var a = i + 1;
-                var show = "#reviewer" + a;
-                document.querySelector(show).classList.remove("invisible");
-            }
-        });
-    }
+    $(".review").on("click", function (e) {
+        var reviews = $(this);
+        $("#pop-up").removeClass("invisible");
+        $("#general-review").removeClass("invisible");
+
+        var howMany = parseInt(reviews.text());
+        for (var i = 0; i < howMany; i++) {
+            var a = i + 1;
+            var show = "#reviewer" + a;
+            $(show).removeClass("invisible");
+        }
+    });   
+ 
 });
 
 $(document).ready(function () {
-    document.querySelector("#close").addEventListener("click", close);
-    document.querySelector("#close-reviews").addEventListener("click", closeReviews);
-    document.querySelector("#submitReview").addEventListener("click", submitReview);
+    $("#close").on("click", close);
+    $("#close-reviews").on("click", closeReviews);
+    $("#submitReview").on("click", submitReview);
 })
