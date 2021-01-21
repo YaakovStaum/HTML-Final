@@ -25,6 +25,16 @@ var name8 = null;
 var email8 = null;
 var review8 = null;
 
+
+function getDate() {
+    var d = new Date();
+    var y = d.getFullYear();
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
+    var full = y + "/" + m + "/" + day;
+    return full;
+}
+
 function close() {
     $("#pop-up").addClass("invisible");
     $("#my-review").addClass("invisible");
@@ -48,11 +58,13 @@ function submitReview() {
 
     var Product = "#product" + productNum;
     $(Product).find("#write-review").addClass("invisible");
-    $(Product).find("#reviewed").removeClass("invisible");
+    $(Product).find("#reviewed").removeClass("invisible");    
 
     window["name" + productNum] = $("#nameInput").val();
     window["email" + productNum] = $("#eMailAddressInput").val();
     window["review" + productNum] = $("#reviewInput").val();
+    var now = getDate();
+    $(Product).find("#date").text(now);
 
     close();
 }
