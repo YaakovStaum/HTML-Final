@@ -73,8 +73,12 @@
 }
 
 .review-body-body {
-    width: 290px;
+    width: 370px;
     height: 80px;
+}
+
+.review-body-comment {
+    width: 300px;
 }
 
 .review-body-grid {

@@ -146,8 +146,7 @@ $(document).ready(function reviews() {
             var show = "#reviewer" + a;
             $(show).removeClass("invisible");
         }
-    });   
- 
+    });    
 });
 
 $(document).ready(function () {
