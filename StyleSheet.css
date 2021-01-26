@@ -86,3 +86,11 @@
     grid-template-columns: 100px 370px;
     grid-template-rows: 12px 25px 12px 25px 12px 105px 12px;
 }
+
+.italiacs{
+    font-style: italic;
+}
+
+.bold{
+    font-weight:bold; 
+}

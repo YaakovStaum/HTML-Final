@@ -221,16 +221,13 @@ $(document).ready(function reviews() {
         var printSection = productReviews[sectionInArr];
 
         for (var i = 0; i < printSection.reviews.length; i++) {
-            var nameDiv = $("<div>").text(printSection.reviews[i].name);
-            var dateDiv = $("<div>").text(printSection.reviews[i].date);
-            var headerHead = $("<div>").addClass("review-body-header flex");
-            $(headerHead)
-                .append(nameDiv)
-                .append(dateDiv);
 
-            var commentDiv = $("<div>").text(printSection.reviews[i].review).addClass("review-body-comment");
-            var commentWrapper = $("<div>").addClass("review-body-body flex ");
-            $(commentWrapper).append(commentDiv);
+            var headerHead = $("<div>").addClass("review-body-header flex")
+                .append($("<div>").text(printSection.reviews[i].name).addClass("bold"))
+                .append($("<div>").text(printSection.reviews[i].date).addClass("italiacs"));
+
+            var commentWrapper = $("<div>").addClass("review-body-body flex ")
+                .append($("<div>").text(printSection.reviews[i].review).addClass("review-body-comment"));            
 
             var fullReview = $("<div>").addClass("review-pop-up review-body");
             $(fullReview)
