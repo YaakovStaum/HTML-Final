@@ -1,0 +1,210 @@
+[
+  {
+    "productId": 1,
+    "image": "Product1.png",
+    "productName": "Mekupelet",
+    "ratings": 0,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Talkas Cheap",
+        "date": "02 / 04 / 2020",
+        "review": "Blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah!"
+      },
+      {
+        "reviewID": 2,
+        "name": "Robya Blind",
+        "date": "22/06/2020",
+        "review": "It's good, but not worth the price!"
+      },
+      {
+        "reviewID": 3,
+        "name": "Coulda Ben",
+        "date": "16/09/2020",
+        "review": "So I ate it, wanna make something of it???"
+      }
+    ]
+  },
+  {
+    "productId": 2,
+    "image": "Product2.png",
+    "productName": "Kif Kef",
+    "ratings": 3,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Billy Neder",
+        "date": "02 / 04 / 2020",
+        "review": "Blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah!"
+      },
+      {
+        "reviewID": 2,
+        "name": "Sheli Brown",
+        "date": "22/06/2020",
+        "review": "Buzz buzz buzz buzz buzz buzz buzzbuzz. Buzz buzzbuzzbuzzbuzzbuzzbuzzbuzz!"
+      },
+      {
+        "reviewID": 3,
+        "name": "Nafka Mina",
+        "date": "16/09/2020",
+        "review": "mah nishtana halayla hazeh, mikol halylos?"
+      },
+      {
+        "reviewID": 4,
+        "name": "Yaakov Yisrael",
+        "date": "02 / 04 / 2020",
+        "review": "Let's burn something. Pas and shosekim!"
+      },
+      {
+        "reviewID": 5,
+        "name": "Compu Skills",
+        "date": "21 / 12 / 2020",
+        "review": "C# ASP.NET MVC Jquery SureYnot."
+      },
+      {
+        "reviewID": 6,
+        "name": "Charli Brown",
+        "date": "16/09/2020",
+        "review": "Don't move the ball for once! Oh, you are so immature!"
+      }
+    ]
+  },
+  {
+    "productId": 3,
+    "image": "Product3.png",
+    "productName": "Choclate Bar",
+    "ratings": 5,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Ernie Muppet",
+        "date": "16 / 03 / 2020",
+        "review": "Oh, Rubber Ducky, you're the one! You make bath time so much fun!"
+      },
+      {
+        "reviewID": 2,
+        "name": "Bert Muppet",
+        "date": "16 / 03 / 2020",
+        "review": "Get out already. Other people wanna take a shower here too!!!!"
+      }
+    ]
+  },
+  {
+    "productId": 4,
+    "image": "Product4.png",
+    "productName": "Maneh Chamah",
+    "ratings": 2,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Lorem Ipsum",
+        "date": "01 / 01 / 1960",
+        "review": "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    ]
+  },
+  {
+    "productId": 5,
+    "image": "Product5.png",
+    "productName": "Iced Coffee",
+    "ratings": 4,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Charli Horse",
+        "date": "05/ 05 / 2005",
+        "review": "Yabba Dabba Doooooooooooooooo!"
+      },
+      {
+        "reviewID": 2,
+        "name": "Lamb Chop",
+        "date": "05/ 05 / 2005",
+        "review": "No silly, we don't say that. That's The Flinestones!"
+      },
+      {
+        "reviewID": 3,
+        "name": "Hush Puppy",
+        "date": "05/ 05 / 2005",
+        "review": "Ok, Lamb Chop. Here go's: That's The Flinestones!"
+      }
+    ]
+  },
+  {
+    "productId": 6,
+    "image": "Product6.png",
+    "productName": "Pepsi",
+    "ratings": 1,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Overly Cautious",
+        "date": "06 / 09 / 2020",
+        "review": "There OK, I guess."
+      },
+      {
+        "reviewID": 2,
+        "name": "Clue Less",
+        "date": "06 / 09 / 2020",
+        "review": "Tastes good! I hear they are like, really heathy and good for you!"
+      },
+      {
+        "reviewID": 3,
+        "name": "Health Freak",
+        "date": "06 / 09 / 2020",
+        "review": "It's pure POISON!"
+      }
+    ]
+  },
+  {
+    "productId": 7,
+    "image": "Product7.png",
+    "productName": "Coca Cola",
+    "ratings": 2,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Bud Abbott",
+        "date": "06 / 12/ 1945",
+        "review": "You never know what your going to find in the can!"
+      },
+      {
+        "reviewID": 2,
+        "name": "Lou Costello",
+        "date": "06 / 12/ 1945",
+        "review": "CAN? I don't wanna find out who's in the can. I've never stole in my life!!!!"
+      }
+    ]
+  },
+  {
+    "productId": 8,
+    "image": "Product8.png",
+    "productName": "Sprite",
+    "ratings": 3,
+    "reviews": [
+      {
+        "reviewID": 1,
+        "name": "Your Dad",
+        "date": "01 / 01 / 2021",
+        "review": "Huh, what?...Oh Okay, I guess...what's Okay?"
+      },
+      {
+        "reviewID": 2,
+        "name": "Your Mom",
+        "date": "01 / 01 / 2021",
+        "review": "Did you wipe if with a disinfectant first? You have to be careful. You don't know who touched it first!"
+      },
+      {
+        "reviewID": 3,
+        "name": "Your Bubby",
+        "date": "01 / 01 / 2021",
+        "review": "Don't worry about me. I have this can. It will keep me from starving, here all by myself. In the dark. With the cold, cold wind blowing in."
+      },
+      {
+        "reviewID": 4,
+        "name": "Your Doctor",
+        "date": "01 / 01 / 2021",
+        "review": "It is very good! But you can't have it!!!!"
+      }
+    ]
+  }
+]

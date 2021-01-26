@@ -35,6 +35,10 @@
     align-items: center;
 }
 
+.center {
+    text-align: center;
+}
+
 .product {
     text-align: center;
     padding-top: 10px;

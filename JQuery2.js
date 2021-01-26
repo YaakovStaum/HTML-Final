@@ -176,38 +176,11 @@ $(document).ready(function myReview() {
 })
 
 $(document).ready(function stars() {
-    $(".star1").on("click", function oneStars(e) {
-        var oneStar = $(this);
-        oneStar.addClass("fas");
-        oneStar.nextAll().removeClass("fas");
-    });
-
-    $(".star2").on("click", function twoStars(e) {
-        var twoStar = $(this);
-        twoStar.addClass("fas");
-        twoStar.nextAll().removeClass("fas");
-        twoStar.prevAll().addClass("fas");
-    });
-
-    $(".star3").on("click", function threeStars(e) {
-        var threeStar = $(this);
-        threeStar.addClass("fas");
-        threeStar.nextAll().removeClass("fas");
-        threeStar.prevAll().addClass("fas");
-    });
-
-    $(".star4").on("click", function fourStars(e) {
-        var fourStar = $(this);
-        fourStar.addClass("fas");
-        fourStar.nextAll().removeClass("fas");
-        fourStar.prevAll().addClass("fas");
-    });
-
-    $(".star5").on("click", function fiveStars(e) {
-        var fiveStar = $(this);
-        fiveStar.addClass("fas");
-        fiveStar.nextAll().removeClass("fas");
-        fiveStar.prevAll().addClass("fas");
+    $(".fa-star").on("click", function Stars(e) {
+        var Star = $(this);
+        Star.addClass("fas");
+        Star.nextAll().removeClass("fas");
+        Star.prevAll().addClass("fas");
     });
 })
 
