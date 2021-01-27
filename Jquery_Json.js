@@ -53,7 +53,7 @@ $(document).ready(function () {
                 var unrating = 5 - ratings;
 
                 var pluralQ;
-                if (productJson.ratings == 1) {
+                if (productJson.reviews.length == 1) {
                     pluralQ = " Review"
                 }
                 else {
@@ -66,8 +66,8 @@ $(document).ready(function () {
                         .append($("<div>").addClass("stars")))
                     .append($("<p>").addClass("reviews")
                         .append($("<button>").addClass("review review-button")
-                            .append($("<text>").text(productJson.ratings).addClass("reviewsNumber"))
-                            .append($("<text>").text(pluralQ)).addClass("checkP")))
+                            .append($("<text>").text(productJson.reviews.length).addClass("reviewsNumber"))
+                            .append($("<text>").text(pluralQ).addClass("checkP"))))
                     .append($("<button>").addClass("persanal-reviews").text("Write Review"))
 
 
@@ -129,23 +129,40 @@ $(document).ready(function () {
 
                 var Product = "#" + productNum;
 
-                //if (clicked == false) {
+                if (!$(Product).data("clicked")) {
+                    $(Product).data("clicked", "true");
 
                     $(Product).find(".persanal-reviews").remove();
 
                     var now = getDate();
-                    window["date" + productNum] = now;
+                    window["date" + productNum] = now;                    
 
                     $(Product)
                         .append($("<p>").addClass("reviewed")
                             .append($("<text>").text("You wrote a "))
                             .append($("<button>").addClass("edit-review-button review-button").text("review"))
-                            .append($("<text>").text(" on " + now)));
-                    $(Product).find(".reviewsNumber").text(parseInt($(Product).find(".reviewsNumber").text()) + 1);
-                    $(Product).find(".checkP").text(checkPlural());
+                            .append($("<text>").addClass("timeStamp").text(" on " + now)));
 
-                    //clicked = true;
-                //}
+                    var newReviewNumber = parseInt($(Product).find(".reviewsNumber").text()) + 1;
+                    $(Product).find(".reviewsNumber").text(newReviewNumber);                  
+
+                    var newReviewPlural;
+                    if (newReviewNumber == 1) {
+                        newReviewPlural = " Review"
+                    }
+                    else {
+                        newReviewPlural = " Reviews"
+                    }
+
+                    $(Product).find(".checkP").text(newReviewPlural);
+                }
+                else {                    
+
+                    var now = getDate();
+                    window["date" + productNum] = now;
+
+                    $(Product).find($(".timeStamp").text(" on " + now)); 
+                }
 
                 window["name" + productNum] = $("#nameInput").val();
                 window["email" + productNum] = $("#eMailAddressInput").val();
@@ -173,7 +190,27 @@ $(document).ready(function () {
                 var reviews = $(this);
 
                 productNum = reviews.closest("div").attr("id");
+                var printReviews = allProducts[productNum - 1];
+                for (var i = 0; i < printReviews.reviews.length; i++) {                    
+                    $("#general-review").append($("<div>").addClass("review-pop-up review-body")
+                        .append($("<div>").addClass("review-body-header flex")
+                            .append($("<div>").text(printReviews.reviews[i].name).addClass("bold"))
+                            .append($("<div>").text(printReviews.reviews[i].date).addClass("italiacs")))
+                        .append($("<div>").addClass("review-body-body flex ")
+                            .append($("<div>").text(printReviews.reviews[i].review).addClass("review-body-comment"))));
+                }
 
+                if (window["name" + productNum] != null) {
+                    $("#general-review").append($("<div>").addClass("review-pop-up review-body")
+                        .append($("<div>").addClass("review-body-header flex")
+                            .append($("<div>").text(window["name" + productNum]).addClass("bold"))
+                            .append($("<div>").text(window["date" + productNum]).addClass("italiacs")))
+                        .append($("<div>").addClass("review-body-body flex ")
+                            .append($("<div>").text(window["review" + productNum]).addClass("review-body-comment"))));
+                }
+
+                $("#pop-up").removeClass("invisible");
+                $("#general-review").removeClass("invisible");
             });
 
             $(".fa-star").on("click", function Stars(e) {

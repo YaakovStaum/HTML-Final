@@ -10,18 +10,6 @@
         "name": "Talkas Cheap",
         "date": "02 / 04 / 2020",
         "review": "Blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah. Blah blah!"
-      },
-      {
-        "reviewID": 2,
-        "name": "Robya Blind",
-        "date": "22/06/2020",
-        "review": "It's good, but not worth the price!"
-      },
-      {
-        "reviewID": 3,
-        "name": "Coulda Ben",
-        "date": "16/09/2020",
-        "review": "So I ate it, wanna make something of it???"
       }
     ]
   },
@@ -135,24 +123,7 @@
     "productName": "Pepsi",
     "ratings": 1,
     "reviews": [
-      {
-        "reviewID": 1,
-        "name": "Overly Cautious",
-        "date": "06 / 09 / 2020",
-        "review": "There OK, I guess."
-      },
-      {
-        "reviewID": 2,
-        "name": "Clue Less",
-        "date": "06 / 09 / 2020",
-        "review": "Tastes good! I hear they are like, really heathy and good for you!"
-      },
-      {
-        "reviewID": 3,
-        "name": "Health Freak",
-        "date": "06 / 09 / 2020",
-        "review": "It's pure POISON!"
-      }
+      
     ]
   },
   {
