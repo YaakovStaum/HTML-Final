@@ -33,9 +33,7 @@ var email8 = null;
 var review8 = null;
 var date8 = null;
 
-function checkPlural() {
 
-};
 
 $(document).ready(function () {
     $.ajax({
@@ -98,7 +96,11 @@ $(document).ready(function () {
             if (limitRow != 0) {
                 $("#products").append(rowDiv);
             }
-
+        })
+        .catch(function () {
+            alert("Sorry, the products need to be revised. Please contact Grade A Store.");
+        })
+        .then(function () {
 
             function close() {
                 $("#pop-up").addClass("invisible");
@@ -137,6 +139,7 @@ $(document).ready(function () {
                     var now = getDate();
                     window["date" + productNum] = now;                    
 
+                    $.getJSON("json.json", function (allProducts) {
                     $(Product)
                         .append($("<p>").addClass("reviewed")
                             .append($("<text>").text("You wrote a "))
@@ -154,7 +157,11 @@ $(document).ready(function () {
                         newReviewPlural = " Reviews"
                     }
 
-                    $(Product).find(".checkP").text(newReviewPlural);
+                        $(Product).find(".checkP").text(newReviewPlural);
+                    })
+                        .catch(function () {
+                            alert("We can not accept your review at this time. Please contact Grade A Store");
+                        })
                 }
                 else {                    
 
@@ -189,7 +196,9 @@ $(document).ready(function () {
             $(".review").on("click", function reviews() {
                 var reviews = $(this);
 
+                $.getJSON("json.json", function (allProducts) { 
                 productNum = reviews.closest("div").attr("id");
+
                 var printReviews = allProducts[productNum - 1];
                 for (var i = 0; i < printReviews.reviews.length; i++) {                    
                     $("#general-review").append($("<div>").addClass("review-pop-up review-body")
@@ -207,7 +216,11 @@ $(document).ready(function () {
                             .append($("<div>").text(window["date" + productNum]).addClass("italiacs")))
                         .append($("<div>").addClass("review-body-body flex ")
                             .append($("<div>").text(window["review" + productNum]).addClass("review-body-comment"))));
-                }
+                    }
+                })
+                    .catch(function () {
+                        alert("Product reviews are not available at this time. Please contact Grade A Store.");
+                    })
 
                 $("#pop-up").removeClass("invisible");
                 $("#general-review").removeClass("invisible");
