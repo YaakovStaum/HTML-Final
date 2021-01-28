@@ -2,7 +2,7 @@
   {
     "productId": 1,
     "image": "Product1.png",
-    "productName": "Mekupelet",
+    "name": "Mekupelet",
     "ratings": 0,
     "reviews": [
       {
@@ -16,7 +16,7 @@
   {
     "productId": 2,
     "image": "Product2.png",
-    "productName": "Kif Kef",
+    "name": "Kif Kef",
     "ratings": 3,
     "reviews": [
       {
@@ -60,7 +60,7 @@
   {
     "productId": 3,
     "image": "Product3.png",
-    "productName": "Choclate Bar",
+    "name": "Choclate Bar",
     "ratings": 5,
     "reviews": [
       {
@@ -80,7 +80,7 @@
   {
     "productId": 4,
     "image": "Product4.png",
-    "productName": "Maneh Chamah",
+    "name": "Maneh Chamah",
     "ratings": 2,
     "reviews": [
       {
@@ -94,7 +94,7 @@
   {
     "productId": 5,
     "image": "Product5.png",
-    "productName": "Iced Coffee",
+    "name": "Iced Coffee",
     "ratings": 4,
     "reviews": [
       {
@@ -120,7 +120,7 @@
   {
     "productId": 6,
     "image": "Product6.png",
-    "productName": "Pepsi",
+    "name": "Pepsi",
     "ratings": 1,
     "reviews": [
       
@@ -129,7 +129,7 @@
   {
     "productId": 7,
     "image": "Product7.png",
-    "productName": "Coca Cola",
+    "name": "Coca Cola",
     "ratings": 2,
     "reviews": [
       {
@@ -149,7 +149,7 @@
   {
     "productId": 8,
     "image": "Product8.png",
-    "productName": "Sprite",
+    "name": "Sprite",
     "ratings": 3,
     "reviews": [
       {

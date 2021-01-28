@@ -59,9 +59,11 @@ $(document).ready(function () {
                 }
 
                 var productDiv = $("<div>").addClass("col-lg-3 center border").attr("id", productJson.productId)
-                    .append($("<div>").addClass("product")
-                        .append($("<img>").attr({ src: productJson.image }))
-                        .append($("<div>").addClass("stars")))
+                    .append($("<div>").addClass("product"))
+                    .append($("<div>").addClass("imgContainer")
+                        .append($("<img>").attr({ src: productJson.image })))
+                    .append($("<div>").text(productJson.name))
+                    .append($("<div>").addClass("stars"))
                     .append($("<p>").addClass("reviews")
                         .append($("<button>").addClass("review review-button")
                             .append($("<text>").text(productJson.reviews.length).addClass("reviewsNumber"))
