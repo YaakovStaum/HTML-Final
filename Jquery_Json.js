@@ -33,8 +33,6 @@ var email8 = null;
 var review8 = null;
 var date8 = null;
 
-
-
 $(document).ready(function () {
     $.ajax({
         url: "json.json",
@@ -128,7 +126,7 @@ $(document).ready(function () {
                 var full = y + "/" + m + "/" + day;
                 return full;
             }
-
+           
             function submitReview() {
 
                 var Product = "#" + productNum;
@@ -164,6 +162,22 @@ $(document).ready(function () {
                         .catch(function () {
                             alert("We can not accept your review at this time. Please contact Grade A Store");
                         })
+                        .then(function () {
+                            $(".edit-review-button").on("click", function (e) {
+                                var editReviews = $(this);
+
+                                productNum = editReviews.closest("div").attr("id");
+
+                                $("#nameInput").val(window['name' + productNum]);
+                                $("#eMailAddressInput").val(window["email" + productNum]);
+                                $("#reviewInput").val(window["review" + productNum]);
+
+                                $("#pop-up").removeClass("invisible");
+                                $("#my-review").removeClass("invisible");
+                                $("#write").addClass("invisible");
+                                $("#edit").removeClass("invisible");
+                            });
+                        })
                 }
                 else {                    
 
@@ -177,22 +191,7 @@ $(document).ready(function () {
                 window["email" + productNum] = $("#eMailAddressInput").val();
                 window["review" + productNum] = $("#reviewInput").val();
 
-                close();
-
-                $(".edit-review-button").on("click", function (e) {
-                    var editReviews = $(this);
-
-                    productNum = editReviews.closest("div").attr("id");
-
-                    $("#nameInput").val(window['name' + productNum]);
-                    $("#eMailAddressInput").val(window["email" + productNum]);
-                    $("#reviewInput").val(window["review" + productNum]);
-
-                    $("#pop-up").removeClass("invisible");
-                    $("#my-review").removeClass("invisible");
-                    $("#write").addClass("invisible");
-                    $("#edit").removeClass("invisible");
-                });
+                close();                
             }
 
             $(".review").on("click", function reviews() {
