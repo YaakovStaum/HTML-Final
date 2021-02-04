@@ -33,12 +33,21 @@ var email8 = null;
 var review8 = null;
 var date8 = null;
 
+function showLoader() {
+    $(".loading-mask").show();
+}
+
+function hideLoader() {
+    $(".loading-mask").hide();
+}
+
 $(document).ready(function () {
     $.ajax({
         url: "json.json",
         dataType: "json"
     })
         .then(function (allProducts) {
+            showLoader();
             var limitRow = 0;
             var rowDiv = $("<div>").addClass("row height");
 
@@ -99,6 +108,9 @@ $(document).ready(function () {
         })
         .catch(function () {
             alert("Sorry, the products need to be revised. Please contact Grade A Store.");
+        })
+        .always(function () {
+            hideLoader();
         })
         .then(function () {
 
