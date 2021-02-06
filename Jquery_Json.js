@@ -105,11 +105,10 @@ $(document).ready(function () {
             if (limitRow != 0) {
                 $("#products").append(rowDiv);
             }
+            hideLoader();
         })
         .catch(function () {
             alert("Sorry, the products need to be revised. Please contact Grade A Store.");
-        })
-        .always(function () {
             hideLoader();
         })
         .then(function () {
@@ -152,27 +151,31 @@ $(document).ready(function () {
                     window["date" + productNum] = now;                    
 
                     $.getJSON("json.json", function (allProducts) {
-                    $(Product)
-                        .append($("<p>").addClass("reviewed")
-                            .append($("<text>").text("You wrote a "))
-                            .append($("<button>").addClass("edit-review-button review-button").text("review"))
-                            .append($("<text>").addClass("timeStamp").text(" on " + now)));
-
-                    var newReviewNumber = parseInt($(Product).find(".reviewsNumber").text()) + 1;
-                    $(Product).find(".reviewsNumber").text(newReviewNumber);                  
-
-                    var newReviewPlural;
-                    if (newReviewNumber == 1) {
-                        newReviewPlural = " Review"
-                    }
-                    else {
-                        newReviewPlural = " Reviews"
-                    }
-
-                        $(Product).find(".checkP").text(newReviewPlural);
+                        showLoader();
+                        $(Product)
+                            .append($("<p>").addClass("reviewed")
+                                .append($("<text>").text("You wrote a "))
+                                .append($("<button>").addClass("edit-review-button review-button").text("review"))
+                                .append($("<text>").addClass("timeStamp").text(" on " + now)));
+                        hideLoader();
                     })
                         .catch(function () {
                             alert("We can not accept your review at this time. Please contact Grade A Store");
+                            hideLoader();
+                        })
+                        .then(function () {
+                            var newReviewNumber = parseInt($(Product).find(".reviewsNumber").text()) + 1;
+                            $(Product).find(".reviewsNumber").text(newReviewNumber);
+
+                            var newReviewPlural;
+                            if (newReviewNumber == 1) {
+                                newReviewPlural = " Review"
+                            }
+                            else {
+                                newReviewPlural = " Reviews"
+                            }
+
+                            $(Product).find(".checkP").text(newReviewPlural);
                         })
                         .then(function () {
                             $(".edit-review-button").on("click", function (e) {
@@ -191,48 +194,54 @@ $(document).ready(function () {
                             });
                         })
                 }
-                else {                    
+                else {
 
                     var now = getDate();
                     window["date" + productNum] = now;
 
-                    $(Product).find($(".timeStamp").text(" on " + now)); 
+                    $(Product).find($(".timeStamp").text(" on " + now));
                 }
 
                 window["name" + productNum] = $("#nameInput").val();
                 window["email" + productNum] = $("#eMailAddressInput").val();
                 window["review" + productNum] = $("#reviewInput").val();
 
-                close();                
+                close();
             }
 
             $(".review").on("click", function reviews() {
                 var reviews = $(this);
 
-                $.getJSON("json.json", function (allProducts) { 
-                productNum = reviews.closest("div").attr("id");
+                $.getJSON("json.json", function (allProducts) {
+                    showLoader();
+                    productNum = reviews.closest("div").attr("id");
 
-                var printReviews = allProducts[productNum - 1];
-                for (var i = 0; i < printReviews.reviews.length; i++) {                    
-                    $("#general-review").append($("<div>").addClass("review-pop-up review-body")
-                        .append($("<div>").addClass("review-body-header flex")
-                            .append($("<div>").text(printReviews.reviews[i].name).addClass("bold"))
-                            .append($("<div>").text(printReviews.reviews[i].date).addClass("italiacs")))
-                        .append($("<div>").addClass("review-body-body flex ")
-                            .append($("<div>").text(printReviews.reviews[i].review).addClass("review-body-comment"))));
-                }
-
-                if (window["name" + productNum] != null) {
-                    $("#general-review").append($("<div>").addClass("review-pop-up review-body")
-                        .append($("<div>").addClass("review-body-header flex")
-                            .append($("<div>").text(window["name" + productNum]).addClass("bold"))
-                            .append($("<div>").text(window["date" + productNum]).addClass("italiacs")))
-                        .append($("<div>").addClass("review-body-body flex ")
-                            .append($("<div>").text(window["review" + productNum]).addClass("review-body-comment"))));
+                    var printReviews = allProducts[productNum - 1];
+                    for (var i = 0; i < printReviews.reviews.length; i++) {
+                        $("#general-review").append($("<div>").addClass("review-pop-up review-body")
+                            .append($("<div>").addClass("review-body-header flex")
+                                .append($("<div>").text(printReviews.reviews[i].name).addClass("bold"))
+                                .append($("<div>").text(printReviews.reviews[i].date).addClass("italiacs")))
+                            .append($("<div>").addClass("review-body-body flex ")
+                                .append($("<div>").text(printReviews.reviews[i].review).addClass("review-body-comment"))));
                     }
+                    hideLoader();
                 })
                     .catch(function () {
                         alert("Product reviews are not available at this time. Please contact Grade A Store.");
+                        hideLoader();
+                    })
+                    .then(function () {
+
+                        if (window["name" + productNum] != null) {
+                            $("#general-review").append($("<div>").addClass("review-pop-up review-body")
+                                .append($("<div>").addClass("review-body-header flex")
+                                    .append($("<div>").text(window["name" + productNum]).addClass("bold"))
+                                    .append($("<div>").text(window["date" + productNum]).addClass("italiacs")))
+                                .append($("<div>").addClass("review-body-body flex ")
+                                    .append($("<div>").text(window["review" + productNum]).addClass("review-body-comment"))));
+                        }
+
                     })
 
                 $("#pop-up").removeClass("invisible");
