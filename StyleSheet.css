@@ -66,6 +66,17 @@
     color: blue;
 }
 
+.review-div {
+    border-style: hidden;
+    background-color: inherit;
+}
+
+.no-reviews {
+    position: absolute;
+    width: 100%;
+    height: 25px;
+}
+
 .review-pop-up {
     border: 1px solid black;
     width: 480px;

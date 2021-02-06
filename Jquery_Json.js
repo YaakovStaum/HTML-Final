@@ -77,6 +77,11 @@ $(document).ready(function () {
                             .append($("<text>").text(pluralQ).addClass("checkP"))))
                     .append($("<button>").addClass("persanal-reviews").text("Write Review"))
 
+                if (productJson.reviews.length == 0) {
+                    $(productDiv).find(".reviews")
+                        .prepend($("<div>").addClass("no-reviews"))
+                    $(productDiv).find(".review").removeClass("review-button").addClass("review-div")
+                }
 
                 for (var i = 0; i < ratings; i++) {
                     var starButtonClicked = $("<button>").addClass("fas far fa-star");
@@ -170,6 +175,8 @@ $(document).ready(function () {
                             var newReviewPlural;
                             if (newReviewNumber == 1) {
                                 newReviewPlural = " Review"
+                                $(Product).find(".no-reviews").remove();
+                                $(Product).find(".review").addClass("review-button").removeClass("review-div");
                             }
                             else {
                                 newReviewPlural = " Reviews"
