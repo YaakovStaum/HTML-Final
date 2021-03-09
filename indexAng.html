@@ -1,25 +1,19 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <link href="angular-style.css" />
-    <script src="angular-javasheet.js"></script>
+    <link href="StyleAng.css" />
+    <script src="JavaScriptAng.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <meta charset="utf-8" />
     <title>Store</title>
-
-    <script>
-        angular
-            .module("app", [])
-            .controller("ctrl")
-    </script>
 </head>
-<body ng-app="app">
+<body ng-app="app" >
     <div class="top-bar">
         <h1 style="display: inline-block; margin-top: 20px;">GRADE 'A' STORE</h1>
         <img style="float: right;" src="CompuskillsIcon.png" />
     </div>
 
-    <div class="main">
+    <div class="main" ng-controller="ctrl">
 !        <div class="loading-mask" ng-show="loading">
             <div class="flexbox">
                 <img src="loadingMask.gif" />
@@ -62,6 +56,8 @@
                 </div>
             </div>
         </div>
+
+         <div id="products" class="container" ng-repeat=""></div>
     </div>
 </body>
 </html>
