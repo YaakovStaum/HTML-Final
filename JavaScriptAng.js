@@ -1,26 +1,23 @@
-﻿(function () {
-    "use strict";
+﻿angular
+    .module("app", [])
+    .controller("StoreController", function ($http) {
+        var vm = this;        
 
-    angular
-        .module("app", [])
-        .controller("storecontroller", function ($http) {
-            var vm = this;
+        init();
 
-            vm.loadingMask = loadingMask;
-            vm.downloadProds = downloadProds;
 
-            init();
 
-            function init() { };
+        function downloadProds() {
+            return $http({
+                url: "json(V3-Ang).json",
+                method: "get"
+            })
+                .then(function (httpResponse) {
+                    vm.products = httpResponse.data;
+                });
+        };
 
-            function downloadProds() {
-                return $http({
-                    url: "json.json",
-                    method: "get"
-                })
-                    .then(function (products) {
-
-                    })
-            }
-        })
-})
+        function init() {
+            downloadProds();
+        };
+    });

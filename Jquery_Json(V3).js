@@ -43,7 +43,7 @@ function hideLoader() {
 
 $(document).ready(function () {
     $.ajax({
-        url: "json.json",
+        url: "json(V3-Ang).json",
         dataType: "json"
     })
         .then(function (allProducts) {
@@ -155,7 +155,7 @@ $(document).ready(function () {
                     var now = getDate();
                     window["date" + productNum] = now;                    
 
-                    $.getJSON("json.json", function (allProducts) {
+                    $.getJSON("json(V3-Ang).json", function (allProducts) {
                         showLoader();
                         $(Product)
                             .append($("<p>").addClass("reviewed")
@@ -219,7 +219,7 @@ $(document).ready(function () {
             $(".review").on("click", function reviews() {
                 var reviews = $(this);
 
-                $.getJSON("json.json", function (allProducts) {
+                $.getJSON("json(V3-Ang).json", function (allProducts) {
                     showLoader();
                     productNum = reviews.closest("div").attr("id");
 

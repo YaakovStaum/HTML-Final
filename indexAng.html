@@ -2,62 +2,180 @@
 <html>
 <head>
     <link href="StyleAng.css" />
-    <script src="JavaScriptAng.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2b6389b7bb.js" crossorigin="anonymous"></script>
     <meta charset="utf-8" />
+    <script>
+        angular
+            .module("app", [])
+            .controller("StoreController", function ($http) {
+                var vm = this;
+
+                vm.popUpForm = popUpForm;
+                vm.closeShowForm = closeShowForm;
+                vm.reviews = reviews;
+                vm.closeReviewShower = closeReviewShower;
+
+                init();
+
+                function downloadProds() {
+                    return $http({
+                        url: "json(V3-Ang).json",
+                        method: "get"
+                    })
+                        .then(function (httpResponse) {
+                            vm.products = httpResponse.data;
+                        });
+                };
+
+                function popUpForm(productId) {
+                    vm.curComment = {};
+                    vm.showForm = true;
+                    vm.productId = productId;
+                };
+
+                function closeShowForm() {
+                    vm.showForm = false;
+                };            
+
+                function reviews(product) {
+                    vm.reviewShower = true;
+                    vm.reviewProd = product;
+                };
+
+                function closeReviewShower() {
+                    vm.reviewShower = false;
+                };                    
+
+                function init() {
+                    downloadProds();
+                };
+            });
+    </script>
+    <style>
+        .top-bar {
+            background-color: #085394;
+            height: 100px;
+            margin-bottom: 25px;
+            width: 100vw;
+        }
+
+        .flexbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .loading-mask {
+            opacity: .5;
+        }
+
+        .review-pop-up {
+            border: 1px solid black;
+            width: 480px;
+            background-color: white;
+        }
+
+        .review-header {
+            height: 31px;
+        }
+
+        .center {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .pop-up {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .review-body-header {
+            width: 100px;
+            height: 80px;
+            float: left;
+            flex-direction: column;
+        }
+
+        .imgContainer {
+            padding:7%;
+        }
+
+        .fa-star {
+            border: none;
+            background-color: inherit;
+        }
+
+        .fas {
+            color: yellow;
+        }
+
+        .border-double{
+            border:double;
+        }
+
+        .review-button {
+            border-style: hidden;
+            background-color: inherit;
+            color: blue;
+        }
+    </style>
     <title>Store</title>
 </head>
-<body ng-app="app" >
+<body ng-app="app">
     <div class="top-bar">
         <h1 style="display: inline-block; margin-top: 20px;">GRADE 'A' STORE</h1>
         <img style="float: right;" src="CompuskillsIcon.png" />
     </div>
 
-    <div class="main" ng-controller="ctrl">
-!        <div class="loading-mask" ng-show="loading">
+    <div ng-controller="StoreController as storeCtrl">
+        <div ng-show="storeCtrl.showForm" class="pop-up">
             <div class="flexbox">
-                <img src="loadingMask.gif" />
-            </div>
-        </div>
-
-!        <div class="general-review" ng-show="general-review">
-             <div class="flexbox">
-                 <div class="review-pop-up review-header">
-                     <p style="display:inline-block">View Reviews</p>
-!                     <button class="close" id="close-reviews" style="float:right;">X</button>
-                 </div>
-             </div>
-        </div>
-
-!        <div class="my-review" ng-show="my-review">
-            <div class="flexbox">
-                <div class="review-pop-up review-header">
-                    <div style="display:inline-block"><p id="write">Write A Review</p><p id="edit" class="invisible">Edit Review</p></div>
-!                    <button id="close" style="float:right;">X</button>
-                </div>
-!                <div class="review-body-grid">
-                    <div></div>
-                    <div></div>
-                    <label class="flex">Name</label>
-                    <input type="text" id="nameInput" value="" style="height:25px" />
-                    <div></div>
-                    <div></div>
-                    <label class="flex">Email Address</label>
-                    <input type="text" id="eMailAddressInput" value="" style="height:25px" />
-                    <div></div>
-                    <div></div>
-                    <label class="flex">Review</label>
-                    <textarea id="reviewInput" value="" style="height: 102px; width:365px"></textarea>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="flex">
-!                    <button id="submitReview" style="margin-bottom:15px">Submit Review</button>
+                <div class="review-pop-up">
+                    <div style="display:inline-block">Write A Review {{ storeCtrl.productId }}</div>
+                    <button ng-click="storeCtrl.closeShowForm()" style="float:right;">X</button>
                 </div>
             </div>
         </div>
 
-         <div id="products" class="container" ng-repeat=""></div>
+        <div ng-show="storeCtrl.reviewShower" class="pop-up">
+            <div class="flexbox">
+                <div class="review-pop-up">
+                    <div class="review-pop-up review-header">
+                        <div style="display:inline-block">View Review {{ storeCtrl.productId }}</div>
+                        <button ng-click="storeCtrl.closeReviewShower()" style="float:right;">X</button>
+                    </div>
+                    <div class="review-pop-up review-body">
+                        <div ng-repeat="review in storeCtrl.reviewProd.reviews" class="review-body-header flex">
+                            <div class="bold">{{ review.name }}</div>
+                            <div class="italiacs">{{ review.date }}</div>
+                        </div>
+                        <div class="review-body-body flex">
+                            <div class="review-body-comment">{{ review.review }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div ng-repeat="product in storeCtrl.products" class="col-lg-3 center border-double" id="{{ product.productId }}">
+                    <div class="imgContainer"><img src="{{ product.image }}" /></div>
+                    <div>{{ product.name }}</div>
+                    <div class="stars">
+                        <button type="button" ng-repeat="x in [].constructor(product.ratings) track by $index" class="fas far fa-star"></button><button type="button" ng-repeat="x in [].constructor(5 - product.ratings) track by $index" class="far fa-star"></button>
+                    </div>
+                    <div class="reviews"><button type="button" class="review-button" ng-click="storeCtrl.reviews(product)">{{ product.reviews.length}} Review</button></div>
+                    <div><button ng-click="storeCtrl.popUpForm(product.productId)">Reviews</button></div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
