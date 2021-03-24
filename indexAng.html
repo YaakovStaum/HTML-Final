@@ -16,6 +16,7 @@
                 vm.closeShowForm = closeShowForm;
                 vm.reviews = reviews;
                 vm.closeReviewShower = closeReviewShower;
+                vm.submitReview = submitReview;
 
                 init();
 
@@ -32,12 +33,19 @@
                 function popUpForm(productId) {
                     vm.curComment = {};
                     vm.showForm = true;
-                    vm.productId = productId;
+                    vm.curComment.productId = productId;
                 };
 
                 function closeShowForm() {
                     vm.showForm = false;
-                };            
+                };
+
+                function submitReview() {
+                    vm.curComment.date = new Date();
+                    vm.myProdReviews.push(vm.curComment);
+                    vm.curComment = {};
+                    closeShowForm();
+                };
 
                 function reviews(product) {
                     vm.reviewShower = true;
@@ -46,14 +54,19 @@
 
                 function closeReviewShower() {
                     vm.reviewShower = false;
-                };                    
+                };       
 
                 function init() {
                     downloadProds();
+                    vm.myProdReviews = [];
                 };
             });
     </script>
     <style>
+        .height {
+            height: 310px;
+            margin-bottom: 10vh;
+        }
         .top-bar {
             background-color: #085394;
             height: 100px;
@@ -68,11 +81,18 @@
             width: 100%;
             height: 100%;
         }
-
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .loading-mask {
             opacity: .5;
         }
-
+        .product {
+            text-align: center;
+            padding-top: 10px;
+        }
         .review-pop-up {
             border: 1px solid black;
             width: 480px;
@@ -92,7 +112,7 @@
             position: absolute;
             z-index: 1;
             width: 100%;
-            height: 100%;
+            height: 80%;
         }
 
         .review-body-header {
@@ -100,6 +120,13 @@
             height: 80px;
             float: left;
             flex-direction: column;
+        }
+        .review-body-body {
+            width: 370px;
+            height: 80px;
+        }
+        .review-body-comment {
+            width: 300px;
         }
 
         .imgContainer {
@@ -114,7 +141,15 @@
         .fas {
             color: yellow;
         }
-
+        .review-div {
+            border-style: hidden;
+            background-color: inherit;
+        }
+        .no-reviews {
+            position: absolute;
+            width: 100%;
+            height: 25px;
+        }
         .border-double{
             border:double;
         }
@@ -123,6 +158,19 @@
             border-style: hidden;
             background-color: inherit;
             color: blue;
+        }
+
+        .form-label{
+            width:130px;
+            margin:15px;
+        }
+
+        .form-input{
+            width:280px;
+        }
+
+        .form-button{
+            margin:15px;
         }
     </style>
     <title>Store</title>
@@ -137,8 +185,16 @@
         <div ng-show="storeCtrl.showForm" class="pop-up">
             <div class="flexbox">
                 <div class="review-pop-up">
-                    <div style="display:inline-block">Write A Review {{ storeCtrl.productId }}</div>
-                    <button ng-click="storeCtrl.closeShowForm()" style="float:right;">X</button>
+                    <div class="review-pop-up">
+                        <div style="display:inline-block">Write A Review {{ storeCtrl.productId }}</div>
+                        <button ng-click="storeCtrl.closeShowForm()" style="float:right;">X</button>
+                    </div>
+                    <form name="reviewForm" ng-submit="storeCtrl.submitReview()">
+                        <div class="flex"> <label class="form-label">Name</label> <input class="form-input" type="text" name="name" ng-modal="storeCtrl.curComment.name" /></div>
+                        <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-modal="storeCtrl.curComment.Email" /></div>
+                        <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-modal="storeCtrl.curComment.review"></textarea></div>
+                        <div class="flex"><button class="form-button">Submit Review</button></div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -150,8 +206,8 @@
                         <div style="display:inline-block">View Review {{ storeCtrl.productId }}</div>
                         <button ng-click="storeCtrl.closeReviewShower()" style="float:right;">X</button>
                     </div>
-                    <div class="review-pop-up review-body">
-                        <div ng-repeat="review in storeCtrl.reviewProd.reviews" class="review-body-header flex">
+                    <div ng-repeat="review in storeCtrl.reviewProd.reviews" class="review-pop-up review-body">
+                        <div class="review-body-header flex">
                             <div class="bold">{{ review.name }}</div>
                             <div class="italiacs">{{ review.date }}</div>
                         </div>
@@ -168,10 +224,12 @@
                 <div ng-repeat="product in storeCtrl.products" class="col-lg-3 center border-double" id="{{ product.productId }}">
                     <div class="imgContainer"><img src="{{ product.image }}" /></div>
                     <div>{{ product.name }}</div>
-                    <div class="stars">
-                        <button type="button" ng-repeat="x in [].constructor(product.ratings) track by $index" class="fas far fa-star"></button><button type="button" ng-repeat="x in [].constructor(5 - product.ratings) track by $index" class="far fa-star"></button>
+                    <div class="stars"> 
+                            <button ng-repeat="star in [1,2,3,4,5]" class="far fa-star" ng-class="{'fas': star <= product.ratings}" ng-click="product.ratings = star" type="button"></button>
                     </div>
-                    <div class="reviews"><button type="button" class="review-button" ng-click="storeCtrl.reviews(product)">{{ product.reviews.length}} Review</button></div>
+                    <div class="reviews">
+                        <button type="button" class="review-button" ng-click="storeCtrl.reviews(product)">{{ product.reviews.length}} Review</button>
+                    </div>
                     <div><button ng-click="storeCtrl.popUpForm(product.productId)">Reviews</button></div>
                 </div>
             </div>
