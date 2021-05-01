@@ -32,7 +32,6 @@
                 </div>
             </div>
         </div>
-
         <div ng-show="storeCtrl.reviewShower" class="pop-up">
             <div class="flexbox">
                 <div class="review-pop-up">
@@ -58,11 +57,11 @@
                 <div ng-repeat="product in storeCtrl.products" class="col-lg-3 center border-double" id="{{ product.productId }}">
                     <div class="imgContainer"><img src="{{ product.image }}" /></div>
                     <div>{{ product.name }}</div>
-                    <div class="stars"> 
-                            <button ng-repeat="star in [1,2,3,4,5]" class="far fa-star" ng-class="{'fas': star <= product.ratings}" ng-click="product.ratings = star" type="button"></button>
+                    <div class="stars">
+                        <button ng-repeat="star in [1,2,3,4,5]" class="far fa-star" ng-class="{'fas': star <= product.ratings}" ng-click="product.ratings = star" type="button"></button>
                     </div>
                     <div class="reviews">
-                        <button type="button" class="review-button" ng-click="storeCtrl.reviews(product)">{{ product.reviews.length}} Review</button>
+                        <button type="button" class="review-button" ng-click="storeCtrl.reviews(product, product.productId)">{{ product.reviews.length}} Review</button>
                     </div>
                     <div><button ng-click="storeCtrl.popUpForm(product.productId)">Reviews</button></div>
                 </div>
