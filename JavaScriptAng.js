@@ -4,6 +4,7 @@
         var vm = this;
 
         vm.popUpForm = popUpForm;
+        vm.checkProdArray = checkProdArray;
         vm.closeShowForm = closeShowForm;
         vm.reviews = reviews;
         vm.closeReviewShower = closeReviewShower;
@@ -26,14 +27,26 @@
             vm.ProdReviewsEdit = new Array();
         };
 
-        function popUpForm(productId) {    
-            vm.showForm = true;            
+        function popUpForm(productId) {
             vm.curComment.productId = productId;
             vm.productId = productId;
+            checkProdArray(productId);
+            vm.showForm = true;  
+        };
+
+        function checkProdArray(productId) {
+            for (let item of vm.ProdReviewsEdit) {
+                if (item.productId == productId) {
+                    vm.curComment.name = item.name
+                    vm.curComment.Email = item.Email
+                    vm.curComment.review = item.review
+                }
+            }
         };
 
         function closeShowForm() {            
             vm.showForm = false;
+            vm.ProdReviewsEdit.push(vm.curComment);
             vm.curComment = {};
         };
 
