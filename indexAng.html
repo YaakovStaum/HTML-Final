@@ -24,9 +24,9 @@
                         <button ng-click="storeCtrl.closeShowForm()" style="float:right;">X</button>
                     </div>
                     <form name="reviewForm" ng-submit="storeCtrl.submitReview()">
-                        <div class="flex"> <label class="form-label">Name</label> <input class="form-input" type="text" name="name" ng-modal="storeCtrl.curComment.name" /></div>
-                        <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-modal="storeCtrl.curComment.Email" /></div>
-                        <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-modal="storeCtrl.curComment.review"></textarea></div>
+                        <div class="flex"> <label class="form-label">Name</label> <input class="form-input" type="text" name="name" ng-model="storeCtrl.curComment.name" /></div>
+                        <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-model="storeCtrl.curComment.Email" /></div>
+                        <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-model="storeCtrl.curComment.review"></textarea></div>
                         <div class="flex"><button class="form-button">Submit Review</button></div>
                     </form>
                 </div>
