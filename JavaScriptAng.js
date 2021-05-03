@@ -30,17 +30,19 @@
         function popUpForm(productId) {
             vm.curComment.productId = productId;
             vm.productId = productId;
-            checkProdArray(productId);
+            checkProdArray(productId, vm.ProdReviewsEdit);
             vm.showForm = true;  
         };
 
-        function checkProdArray(productId) {
-            vm.index = vm.ProdReviewsEdit.findIndex(x => x.productId === productId);
+        function checkProdArray(productId, array) {
+            vm.index = array.findIndex(x => x.productId === productId);
             if (vm.index >= 0) {
-                vm.curComment.name = vm.ProdReviewsEdit[vm.index].name;
-                vm.curComment.Email = vm.ProdReviewsEdit[vm.index].Email;
-                vm.curComment.review = vm.ProdReviewsEdit[vm.index].review;
-                vm.ProdReviewsEdit.splice(vm.index,1);
+                if (array == vm.ProdReviewsEdit) {
+                    vm.curComment.name = array[vm.index].name;
+                    vm.curComment.Email = array[vm.index].Email;
+                    vm.curComment.review = array[vm.index].review;
+                }
+                array.splice(vm.index,1);
             };
         };
 
@@ -50,7 +52,9 @@
             vm.curComment = {};
         };
 
-        function submitReview() {
+        function submitReview(productId) {
+            vm.productId = productId;
+            checkProdArray(productId, vm.ProdReviews);
             vm.curComment.date = new Date();
             vm.ProdReviews.push(vm.curComment);
             closeShowForm();
