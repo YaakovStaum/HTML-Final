@@ -35,13 +35,13 @@
         };
 
         function checkProdArray(productId) {
-            for (let item of vm.ProdReviewsEdit) {
-                if (item.productId == productId) {
-                    vm.curComment.name = item.name
-                    vm.curComment.Email = item.Email
-                    vm.curComment.review = item.review
-                }
-            }
+            vm.index = vm.ProdReviewsEdit.findIndex(x => x.productId === productId);
+            if (vm.index >= 0) {
+                vm.curComment.name = vm.ProdReviewsEdit[vm.index].name;
+                vm.curComment.Email = vm.ProdReviewsEdit[vm.index].Email;
+                vm.curComment.review = vm.ProdReviewsEdit[vm.index].review;
+                vm.ProdReviewsEdit.splice(vm.index,1);
+            };
         };
 
         function closeShowForm() {            
