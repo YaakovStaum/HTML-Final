@@ -9,6 +9,7 @@
         vm.reviews = reviews;
         vm.closeReviewShower = closeReviewShower;
         vm.submitReview = submitReview;
+        vm.sendRatings = sendRatings;
 
         init();
 
@@ -36,8 +37,8 @@
 
         function checkProdArray(productId, array) {
             vm.index = array.findIndex(x => x.productId === productId);
-            if (vm.index >= 0) {
-                if (array == vm.ProdReviewsEdit) {
+            if (array == vm.ProdReviewsEdit) {                
+                if (vm.index >= 0) {
                     vm.curComment.name = array[vm.index].name;
                     vm.curComment.Email = array[vm.index].Email;
                     vm.curComment.review = array[vm.index].review;
@@ -56,7 +57,13 @@
             vm.productId = productId;
             checkProdArray(productId, vm.ProdReviews);
             vm.curComment.date = new Date();
-            vm.ProdReviews.push(vm.curComment);
+            $http({
+                url: "GradeAStar.html",
+                method: "POST",
+                data: vm.curComment
+            })
+                .catch(function (err) { });
+            vm.ProdReviews.push(vm.curComment)
             closeShowForm();
         };
 
@@ -68,6 +75,15 @@
 
         function closeReviewShower() {
             vm.reviewShower = false;
+        };
+
+       function sendRatings(rating) {
+            $http({
+                url: "GradeAStar.json/ratings",
+                method: "POST",
+                data: rating
+            })
+                .catch(function (err) { })
         };
 
         function init() {
