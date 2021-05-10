@@ -15,7 +15,7 @@
 
         function downloadProds() {
             return $http({
-                url: "StoreProducts.json",
+                url: "json(V3-Ang).json",
                 method: "get"
             })
                 .then(function (httpResponse) {
