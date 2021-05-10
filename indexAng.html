@@ -5,6 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2b6389b7bb.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-messages.min.js"></script>
     <meta charset="utf-8" />
     <script src="JavaScriptAng.js"></script>
     <title>Store</title>
@@ -23,10 +24,11 @@
                         <div style="display:inline-block">Write A Review {{ storeCtrl.productId }}</div>
                         <button ng-click="storeCtrl.closeShowForm()" style="float:right;">X</button>
                     </div>
-                    <form name="reviewForm" ng-submit="storeCtrl.submitReview(storeCtrl.productId)">
-                        <div class="flex"> <label class="form-label">Name</label> <input class="form-input" type="text" name="name" ng-model="storeCtrl.curComment.name" /></div>
-                        <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-model="storeCtrl.curComment.Email" /></div>
-                        <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-model="storeCtrl.curComment.review"></textarea></div>
+                    <form name="reviewForm" ng-submit="reviewForm.$valid && storeCtrl.submitReview(storeCtrl.productId)" novalidate>
+                        <div class="form-message">ALL FIELDS ARE REQUIRED</div>
+                        <div class="flex"> <label class="form-label">Name</label> <input class="form-input" type="text" name="name" ng-model="storeCtrl.curComment.name" required /></div>                        
+                        <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-model="storeCtrl.curComment.Email" required /></div>                        
+                        <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-model="storeCtrl.curComment.review" required></textarea></div>                        
                         <div class="flex"><button class="form-button">Submit Review</button></div>
                     </form>
                 </div>

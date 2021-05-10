@@ -1,5 +1,5 @@
 ﻿angular
-    .module("app", [])
+    .module("app", ["ngMessages"])
     .controller("StoreController", function ($http) {
         var vm = this;
 
