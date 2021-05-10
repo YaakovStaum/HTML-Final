@@ -58,7 +58,7 @@
                     <div class="imgContainer"><img src="{{ product.image }}" /></div>
                     <div>{{ product.name }}</div>
                     <div class="stars">
-                        <button ng-repeat="star in [1,2,3,4,5]" class="far fa-star" ng-class="{'fas': star <= product.ratings}" ng-click="product.ratings = star; sendRatings(star)" type="button"></button>
+                        <button ng-repeat="star in [1,2,3,4,5]" class="far fa-star" ng-class="{'fas': star <= product.ratings}" ng-click="product.ratings = star; storeCtrl.sendRatings(star)" type="button"></button>
                     </div>
                     <div class="reviews">
                         <button type="button" class="review-button" ng-click="storeCtrl.reviews(product, product.productId)">{{ product.reviews.length}} Review</button>
