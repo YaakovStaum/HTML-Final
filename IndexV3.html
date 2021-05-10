@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="StyleSheet(V1-3).css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <script src="https://kit.fontawesome.com/2b6389b7bb.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="Jquery_Json(V3).js"></script>
+    <title>Store</title>
+</head>
+<body>
+    <div id="loading-mask" class="loading-mask pop-up">
+        <div class="flexbox">
+            <div class="flex">
+                <img src="loadingMask.gif"  />
+            </div>
+        </div>
+    </div>
+    <div class="top-bar">
+        <h1 style="display: inline-block; margin-top: 20px;">GRADE 'A' STORE</h1>
+        <img style="float: right;" src="CompuskillsIcon.png" />
+    </div>
+    <div id="pop-up" class="pop-up invisible">
+        <div class="flexbox">
+            <div class="review-pop-up invisible" id="general-review">
+                <div class="review-pop-up review-header">
+                    <p style="display:inline-block">View Reviews</p>
+                    <button class="close" id="close-reviews" style="float:right;">X</button>
+                </div>
+            </div>
+            <div class="review-pop-up invisible" id="my-review">
+                <div class="review-pop-up review-header">
+                    <div style="display:inline-block"><p id="write">Write A Review</p><p id="edit" class="invisible">Edit Review</p></div>
+                    <button id="close" style="float:right;">X</button>
+                </div>
+                <div class="review-body-grid">
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Name</label>
+                    <input type="text" id="nameInput" value="" style="height:25px" />
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Email Address</label>
+                    <input type="text" id="eMailAddressInput" value="" style="height:25px" />
+                    <div></div>
+                    <div></div>
+                    <label class="flex">Review</label>
+                    <textarea id="reviewInput" value="" style="height: 102px; width:365px"></textarea>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="flex">
+                    <button id="submitReview" style="margin-bottom:15px">Submit Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="products" class="container">
+    </div>
+</body>
+</html>
