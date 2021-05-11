@@ -57,13 +57,19 @@
             vm.productId = productId;
             checkProdArray(productId, vm.ProdReviews);
             vm.curComment.date = new Date();
+            vm.curComment.userID = "001"
             $http({
                 url: "GradeAStar.html",
                 method: "POST",
                 data: vm.curComment
             })
                 .catch(function (err) { });
-            vm.ProdReviews.push(vm.curComment)
+            vm.ProdReviews.push(vm.curComment);
+            for (let item of vm.products) {
+                if (item.productId == productId) {
+                    item.reviews.push(vm.curComment);
+                }
+            };
             closeShowForm();
         };
 

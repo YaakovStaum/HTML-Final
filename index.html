@@ -29,7 +29,7 @@
                         <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-model="storeCtrl.curComment.Email" required /></div>
                         <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-model="storeCtrl.curComment.review" required></textarea></div>
                         <div ng-show="!reviewForm.$valid" class="form-message">ALL FIELDS ARE REQUIRED</div>
-                        <div class="flex"><button class="form-button">Submit Review</button></div>
+                        <div class="flex" style="justify-content: center"><button class="form-button">Submit Review</button></div>
                     </form>
                 </div>
             </div>
@@ -63,11 +63,11 @@
                         <button ng-repeat="star in [1,2,3,4,5]" class="far fa-star" ng-class="{'fas': star <= product.ratings}" ng-click="product.ratings = star; storeCtrl.sendRatings(star)" type="button"></button>
                     </div>
                     <div class="reviews">
-                        <button type="button" class="review-button" ng-show="revLen != 0" ng-init="revLen = product.reviews.length" ng-click="storeCtrl.reviews(product, product.productId)">
-                            <div ng-show="revLen == 1">{{ revLen }}  Review</div>
-                            <div ng-show="revLen > 1">{{ revLen}}  Reviews</div>
+                        <button type="button" class="review-button" ng-show="product.reviews.length != 0" ng-click="storeCtrl.reviews(product, product.productId)">
+                            <div ng-show="product.reviews.length == 1">{{ product.reviews.length }}  Review</div>
+                            <div ng-show="product.reviews.length > 1">{{ product.reviews.length}}  Reviews</div>
                         </button>
-                        <div ng-show="revLen == 0">No Reviews</div>
+                        <div ng-show="product.reviews.length == 0">No Reviews</div>
                     </div>
                     <div><button ng-click="storeCtrl.popUpForm(product.productId)">Review</button></div>
                 </div>
