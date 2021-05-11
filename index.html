@@ -63,9 +63,13 @@
                         <button ng-repeat="star in [1,2,3,4,5]" class="far fa-star" ng-class="{'fas': star <= product.ratings}" ng-click="product.ratings = star; storeCtrl.sendRatings(star)" type="button"></button>
                     </div>
                     <div class="reviews">
-                        <button type="button" class="review-button" ng-click="storeCtrl.reviews(product, product.productId)">{{ product.reviews.length}} Review</button>
+                        <button type="button" class="review-button" ng-show="revLen != 0" ng-init="revLen = product.reviews.length" ng-click="storeCtrl.reviews(product, product.productId)">
+                            <div ng-show="revLen == 1">{{ revLen }}  Review</div>
+                            <div ng-show="revLen > 1">{{ revLen}}  Reviews</div>
+                        </button>
+                        <div ng-show="revLen == 0">No Reviews</div>
                     </div>
-                    <div><button ng-click="storeCtrl.popUpForm(product.productId)">Reviews</button></div>
+                    <div><button ng-click="storeCtrl.popUpForm(product.productId)">Review</button></div>
                 </div>
             </div>
         </div>
