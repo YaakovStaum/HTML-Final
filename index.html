@@ -21,14 +21,14 @@
             <div class="flexbox">
                 <div class="review-pop-up">
                     <div class="review-pop-up">
-                        <div style="display:inline-block">Write A Review {{ storeCtrl.productId }}</div>
+                        <div style="display:inline-block">Write A Review</div>
                         <button ng-click="storeCtrl.closeShowForm()" style="float:right;">X</button>
                     </div>
                     <form name="reviewForm" ng-submit="reviewForm.$valid && storeCtrl.submitReview(storeCtrl.productId)" novalidate>
-                        <div class="form-message">ALL FIELDS ARE REQUIRED</div>
-                        <div class="flex"> <label class="form-label">Name</label> <input class="form-input" type="text" name="name" ng-model="storeCtrl.curComment.name" required /></div>                        
-                        <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-model="storeCtrl.curComment.Email" required /></div>                        
-                        <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-model="storeCtrl.curComment.review" required></textarea></div>                        
+                        <div class="flex"> <label class="form-label">Name</label> <input class="form-input" type="text" name="name" ng-model="storeCtrl.curComment.name" required /></div>
+                        <div class="flex"><label class="form-label">Email Address</label> <input class="form-input" type="text" name="Email" ng-model="storeCtrl.curComment.Email" required /></div>
+                        <div class="flex"><label class="form-label">Review</label> <textarea class="form-input" type="text" name="review" ng-model="storeCtrl.curComment.review" required></textarea></div>
+                        <div ng-show="!reviewForm.$valid" class="form-message">ALL FIELDS ARE REQUIRED</div>
                         <div class="flex"><button class="form-button">Submit Review</button></div>
                     </form>
                 </div>
@@ -38,7 +38,7 @@
             <div class="flexbox">
                 <div class="review-pop-up">
                     <div class="review-pop-up review-header">
-                        <div style="display:inline-block">View Review {{ storeCtrl.productId }}</div>
+                        <div style="display:inline-block">View Review</div>
                         <button ng-click="storeCtrl.closeReviewShower()" style="float:right;">X</button>
                     </div>
                     <div ng-repeat="review in storeCtrl.reviewProd.reviews" class="review-pop-up review-body">
