@@ -24,7 +24,6 @@
         };
 
         function arrays() {
-            vm.ProdReviews = new Array();
             vm.ProdReviewsEdit = new Array();
         };
 
@@ -37,14 +36,12 @@
 
         function checkProdArray(productId, array) {
             vm.index = array.findIndex(x => x.productId === productId);
-            if (array == vm.ProdReviewsEdit) {                
-                if (vm.index >= 0) {
-                    vm.curComment.name = array[vm.index].name;
-                    vm.curComment.Email = array[vm.index].Email;
-                    vm.curComment.review = array[vm.index].review;
-                }
-                array.splice(vm.index,1);
-            };
+            if (vm.index >= 0) {
+                vm.curComment.name = array[vm.index].name;
+                vm.curComment.Email = array[vm.index].Email;
+                vm.curComment.review = array[vm.index].review;
+            }
+            array.splice(vm.index, 1);
         };
 
         function closeShowForm() {            
@@ -55,7 +52,6 @@
 
         function submitReview(productId) {
             vm.productId = productId;
-            checkProdArray(productId, vm.ProdReviews);
             vm.curComment.date = new Date();
             vm.curComment.userID = "001"
             $http({
@@ -64,7 +60,7 @@
                 data: vm.curComment
             })
                 .catch(function (err) { });
-            vm.ProdReviews.push(vm.curComment);
+
             for (let item of vm.products) {
                 if (item.productId == productId) {
                     item.reviews.push(vm.curComment);
