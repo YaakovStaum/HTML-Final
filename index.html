@@ -44,7 +44,7 @@
                     <div ng-repeat="review in storeCtrl.reviewProd.reviews" class="review-pop-up review-body">
                         <div class="review-body-header flex">
                             <div class="bold">{{ review.name }}</div>
-                            <div class="italiacs">{{ review.date }}</div>
+                            <div class="italiacs">{{ review.date | date }}</div>
                         </div>
                         <div class="review-body-body flex">
                             <div class="review-body-comment">{{ review.review }}</div>
