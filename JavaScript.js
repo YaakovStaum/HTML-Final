@@ -63,7 +63,13 @@
 
             for (let item of vm.products) {
                 if (item.productId == productId) {
-                    item.reviews.push(vm.curComment);
+                    vm.reviewsIndex = item.reviews.findIndex(x => x.userID === "001");
+                    if (vm.reviewsIndex >= 0) {
+                        item.reviews[vm.reviewsIndex] = vm.curComment;
+                    }
+                    else {
+                        item.reviews.push(vm.curComment);
+                    }
                 }
             };
             closeShowForm();
